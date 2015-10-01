@@ -33,7 +33,7 @@ import Sailfish.Silica 1.0
 
 
 Page {
-    id: page
+    id: root
     SilicaListView {
         id: listView
         model: 10
@@ -52,35 +52,35 @@ Page {
             }
             GlassItem {
                 color: "white"
-                x: page.width - width
+                x: root.width - width
                 //falloffRadius: Math.exp(fpixw.value)
                 //radius: Math.exp(pixw.value)
                 //cache: false
             }
             GlassItem {
                 color: "white"
-                x: page.width - (1.5*width)
+                x: root.width - (1.5*width)
                 //falloffRadius: Math.exp(fpixw.value)
                 //radius: Math.exp(pixw.value)
                 //cache: false
             }
             GlassItem {
                 color: "white"
-                x: page.width - (2*width)
+                x: root.width - (2*width)
                 //falloffRadius: Math.exp(fpixw.value)
                 //radius: Math.exp(pixw.value)
                 //cache: false
             }
             GlassItem {
                 color: "white"
-                x: page.width - (2.5*width)
+                x: root.width - (2.5*width)
                 //falloffRadius: Math.exp(fpixw.value)
                 //radius: Math.exp(pixw.value)
                 //cache: false
             }
             GlassItem {
                 color: "white"
-                x: page.width - (3*width)
+                x: root.width - (3*width)
                 //falloffRadius: Math.exp(fpixw.value)
                 //radius: Math.exp(pixw.value)
                 //cache: false
