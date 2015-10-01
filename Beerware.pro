@@ -23,7 +23,9 @@ OTHER_FILES += qml/Beerware.qml \
     rpm/Beerware.spec \
     rpm/Beerware.yaml \
     translations/*.ts \
-    Beerware.desktop
+    Beerware.desktop \
+    qml/pages/NewBeer.qml \
+    qml/pages/About.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line

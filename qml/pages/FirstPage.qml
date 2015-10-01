@@ -90,6 +90,20 @@ Page {
                 console.log("Clicked " + index)
             }
         }
+        PullDownMenu {
+                    MenuItem {
+                        text: "About"
+                        onClicked: {
+                            pageStack.push(Qt.resolvedUrl("About.qml"), {dataContainer: root})
+                        }
+                    }
+                    MenuItem {
+                        text: "Add Beer"
+                        onClicked: {
+                            pageStack.push(Qt.resolvedUrl("NewBeer.qml"), {dataContainer: root, noteUid: 0})
+                        }
+                    }
+        }
         VerticalScrollDecorator {}
     }
 }
