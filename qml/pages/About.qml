@@ -34,7 +34,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: desc.bottom
         anchors.topMargin: 20
-        text: "Copyright: Leszek Lesner <br />License: BSD (3-clause)"
+        text: "Copyright: Pascal Schmid <br />License: Beerware"
         color: "white"
     }
     Button {
