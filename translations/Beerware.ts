@@ -22,5 +22,19 @@
         <source>Return to Top</source>
         <translation type="unfinished"></translation>
     </message>
+<context>
+    <name>NewBeer</name>
+    <message>
+        <source>Beer name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Beer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beer type</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
