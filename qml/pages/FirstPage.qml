@@ -104,6 +104,13 @@ Page {
                         }
                     }
         }
+        PushUpMenu {
+                    spacing: Theme.paddingLarge
+                    MenuItem {
+                        text: qsTr("Return to Top")
+                        onClicked: listView.scrollToTop()
+                    }
+                }
         VerticalScrollDecorator {}
     }
 }

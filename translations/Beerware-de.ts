@@ -18,5 +18,9 @@
         <source>Bier</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Return to Top</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
