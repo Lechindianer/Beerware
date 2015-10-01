@@ -35,18 +35,25 @@ CoverBackground {
     Label {
         id: label
         anchors.centerIn: parent
-        text: qsTr("My Cover")
+        text: qsTr("Beerware")
     }
+
+//    Image {
+//        anchors.margins: Theme.paddingMedium
+//        anchors.top: parent.top
+//        anchors.bottom: header.top
+//        anchors.left: parent.left
+//        anchors.right: parent.right
+//        fillMode: Image.PreserveAspectFit
+//        source: "qrc:///logo.png"
+//        z: imageGrid.z + 1
+//    }
 
     CoverActionList {
         id: coverAction
 
         CoverAction {
-            iconSource: "image://theme/icon-cover-next"
-        }
-
-        CoverAction {
-            iconSource: "image://theme/icon-cover-pause"
+            iconSource: "image://theme/icon-cover-favorite"
         }
     }
 }
