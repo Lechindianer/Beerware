@@ -4,24 +4,21 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <source>My Cover</source>
-        <translation>Mein Cover</translation>
+        <source>Beerware</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
-        <source>Nested Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bier</source>
+        <source>Beerware</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Return to Top</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
 <context>
     <name>NewBeer</name>
     <message>
