@@ -34,61 +34,104 @@ import Sailfish.Silica 1.0
 
 Page {
     id: root
+
+    ListModel {
+        id: pagesModel
+
+        ListElement {
+            page: "ButtonPage.qml"
+            title: "Diebels"
+            section: "Pils"
+            rating: 2
+        }
+        ListElement {
+            page: "ComboBoxPage.qml"
+            title: "Augustiner"
+            section: "Helles"
+            rating: 5
+        }
+        ListElement {
+            page: "MenuPage.qml"
+            title: "Franziskaner"
+            section: "Weizen"
+            rating: 5
+        }
+    }
+
+
+
     SilicaListView {
         id: listView
-        model: 10
+        model: pagesModel
         anchors.fill: parent
         header: PageHeader {
-            title: qsTr("Nested Page")
+            title: qsTr("Beerware")
+        }
+
+        section {
+            property: 'section'
+            delegate: SectionHeader {
+                text: section
+            }
         }
         delegate: BackgroundItem {
-            id: delegate
-
+            width: listView.width
             Label {
-                x: Theme.paddingLarge
-                text: qsTr("Bier")
+                id: listLabel
+                text: model.title
+                color: highlighted ? Theme.highlightColor : Theme.primaryColor
                 anchors.verticalCenter: parent.verticalCenter
-                color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
-            }
-            GlassItem {
-                color: "white"
-                x: root.width - width
-                //falloffRadius: Math.exp(fpixw.value)
-                //radius: Math.exp(pixw.value)
-                //cache: false
-            }
-            GlassItem {
-                color: "white"
-                x: root.width - (1.5*width)
-                //falloffRadius: Math.exp(fpixw.value)
-                //radius: Math.exp(pixw.value)
-                //cache: false
-            }
-            GlassItem {
-                color: "white"
-                x: root.width - (2*width)
-                //falloffRadius: Math.exp(fpixw.value)
-                //radius: Math.exp(pixw.value)
-                //cache: false
-            }
-            GlassItem {
-                color: "white"
-                x: root.width - (2.5*width)
-                //falloffRadius: Math.exp(fpixw.value)
-                //radius: Math.exp(pixw.value)
-                //cache: false
-            }
-            GlassItem {
-                color: "white"
-                x: root.width - (3*width)
-                //falloffRadius: Math.exp(fpixw.value)
-                //radius: Math.exp(pixw.value)
-                //cache: false
+                x: Theme.horizontalPageMargin
             }
 
-            onClicked: {
-                console.log("Clicked " + index)
+            Row {
+                id: row
+                width: parent.width / 3
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                GlassItem {
+                    color: "white"
+                    width: parent.width / 5
+                    height: parent.width / 5
+                    radius: 4
+                    falloffRadius: 0.2
+                    visible: true
+                }
+                GlassItem {
+                    color: "white"
+                    width: parent.width / 5
+                    height: parent.width / 5
+                    radius: 4
+                    falloffRadius: 0.2
+                    visible: true
+                }
+                GlassItem {
+                    color: "white"
+                    width: parent.width / 5
+                    height: parent.width / 5
+                    radius: 4
+                    falloffRadius: 0.2
+                    visible: true
+                }
+                GlassItem {
+                    color: "white"
+                    width: parent.width / 5
+                    height: parent.width / 5
+                    radius: 4
+                    falloffRadius: 0.2
+                    visible: true
+                }
+                GlassItem {
+                    color: "white"
+                    width: parent.width / 5
+                    height: parent.width / 5
+                    radius: 4
+                    falloffRadius: 0.2
+                    visible: true
+                }
+
             }
+           // onClicked: pageStack.push(Qt.resolvedUrl(page))
         }
         PullDownMenu {
                     MenuItem {
