@@ -35,39 +35,13 @@ import Sailfish.Silica 1.0
 Page {
     id: root
 
-    ListModel {
-        id: pagesModel
-
-        ListElement {
-            page: "ButtonPage.qml"
-            title: "Diebels"
-            section: "Pils"
-            rating: 2
-        }
-        ListElement {
-            page: "ComboBoxPage.qml"
-            title: "Augustiner"
-            section: "Helles"
-            rating: 5
-        }
-        ListElement {
-            page: "MenuPage.qml"
-            title: "Franziskaner"
-            section: "Weizen"
-            rating: 5
-        }
-    }
-
-
-
     SilicaListView {
         id: listView
-        model: pagesModel
+        model: BierModel {}
         anchors.fill: parent
         header: PageHeader {
             title: qsTr("Beerware")
         }
-
         section {
             property: 'section'
             delegate: SectionHeader {
