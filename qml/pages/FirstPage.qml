@@ -69,7 +69,7 @@ Page {
                     height: parent.width / 5
                     radius: 4
                     falloffRadius: 0.2
-                    visible: true
+                    visible: (model.rating >= 1) ? true : false
                 }
                 GlassItem {
                     color: "white"
@@ -77,7 +77,7 @@ Page {
                     height: parent.width / 5
                     radius: 4
                     falloffRadius: 0.2
-                    visible: true
+                    visible: (model.rating >= 2) ? true : false
                 }
                 GlassItem {
                     color: "white"
@@ -85,7 +85,7 @@ Page {
                     height: parent.width / 5
                     radius: 4
                     falloffRadius: 0.2
-                    visible: true
+                    visible: (model.rating >= 3) ? true : false
                 }
                 GlassItem {
                     color: "white"
@@ -93,7 +93,7 @@ Page {
                     height: parent.width / 5
                     radius: 4
                     falloffRadius: 0.2
-                    visible: true
+                    visible: (model.rating >= 4) ? true : false
                 }
                 GlassItem {
                     color: "white"
@@ -101,33 +101,32 @@ Page {
                     height: parent.width / 5
                     radius: 4
                     falloffRadius: 0.2
-                    visible: true
+                    visible: (model.rating >= 5) ? true : false
                 }
-
             }
            // onClicked: pageStack.push(Qt.resolvedUrl(page))
         }
         PullDownMenu {
-                    MenuItem {
-                        text: "About"
-                        onClicked: {
-                            pageStack.push(Qt.resolvedUrl("About.qml"), {dataContainer: root})
-                        }
-                    }
-                    MenuItem {
-                        text: "Add Beer"
-                        onClicked: {
-                            pageStack.push(Qt.resolvedUrl("NewBeer.qml"), {dataContainer: root, noteUid: 0})
-                        }
-                    }
+            MenuItem {
+                text: "About"
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("About.qml"), {dataContainer: root})
+                }
+            }
+            MenuItem {
+                text: "Add Beer"
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("NewBeer.qml"), {dataContainer: root, noteUid: 0})
+                }
+            }
         }
         PushUpMenu {
-                    spacing: Theme.paddingLarge
-                    MenuItem {
-                        text: qsTr("Return to Top")
-                        onClicked: listView.scrollToTop()
-                    }
-                }
+            spacing: Theme.paddingLarge
+            MenuItem {
+                text: qsTr("Return to Top")
+                onClicked: listView.scrollToTop()
+            }
+        }
         VerticalScrollDecorator {}
     }
 }
