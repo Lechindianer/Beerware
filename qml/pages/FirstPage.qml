@@ -56,6 +56,24 @@ Page {
             section: "Weizen"
             rating: 5
         }
+        ListElement {
+            page: "MenuPage.qml"
+            title: "Pils 3"
+            section: "Pils"
+            rating: 3
+        }
+        ListElement {
+            page: "MenuPage.qml"
+            title: "Helles 2"
+            section: "Helles"
+            rating: 2
+        }
+        ListElement {
+            page: "MenuPage.qml"
+            title: "Weizen 1 "
+            section: "Weizen"
+            rating: 1
+        }
     }
 
 
@@ -95,7 +113,7 @@ Page {
                     height: parent.width / 5
                     radius: 4
                     falloffRadius: 0.2
-                    visible: true
+                    visible: (model.rating >= 1) ? true : false
                 }
                 GlassItem {
                     color: "white"
@@ -103,7 +121,7 @@ Page {
                     height: parent.width / 5
                     radius: 4
                     falloffRadius: 0.2
-                    visible: true
+                    visible: (model.rating >= 2) ? true : false
                 }
                 GlassItem {
                     color: "white"
@@ -111,7 +129,7 @@ Page {
                     height: parent.width / 5
                     radius: 4
                     falloffRadius: 0.2
-                    visible: true
+                    visible: (model.rating >= 3) ? true : false
                 }
                 GlassItem {
                     color: "white"
@@ -119,7 +137,7 @@ Page {
                     height: parent.width / 5
                     radius: 4
                     falloffRadius: 0.2
-                    visible: true
+                    visible: (model.rating >= 4) ? true : false
                 }
                 GlassItem {
                     color: "white"
@@ -127,7 +145,7 @@ Page {
                     height: parent.width / 5
                     radius: 4
                     falloffRadius: 0.2
-                    visible: true
+                    visible: (model.rating >= 5) ? true : false
                 }
 
             }
