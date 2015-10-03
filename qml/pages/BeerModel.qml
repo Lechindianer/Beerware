@@ -1,37 +1,34 @@
 import QtQuick 2.0
 
 ListModel {
-    id: listModel
-
-    property alias listModel2:listModel
 
     ListElement {
-        title: "Augustiner"
+        name: "Augustiner"
         section: "Helles"
         rating: 5
     }
     ListElement {
-        title: "Helles 2"
+        name: "Helles 2"
         section: "Helles"
         rating: 2
     }
     ListElement {
-        title: "Franziskaner"
+        name: "Franziskaner"
         section: "Weizen"
         rating: 5
     }
     ListElement {
-        title: "Weizen 1"
+        name: "Weizen 1"
         section: "Weizen"
         rating: 1
     }
     ListElement {
-        title: "Pils 3"
+        name: "Pils 3"
         section: "Pils"
         rating: 3
     }
     ListElement {
-        title: "Diebels"
+        name: "Diebels"
         section: "Pils"
         rating: 2
     }

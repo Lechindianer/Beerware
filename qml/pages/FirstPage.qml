@@ -37,7 +37,7 @@ Page {
 
     SilicaListView {
         id: listView
-        model: BierModel {}
+        model: BeerModel { id: beerModel }
         anchors.fill: parent
         header: PageHeader {
             title: qsTr("Beerware")
@@ -52,7 +52,7 @@ Page {
             width: listView.width
             Label {
                 id: listLabel
-                text: model.title
+                text: model.name
                 color: highlighted ? Theme.highlightColor : Theme.primaryColor
                 anchors.verticalCenter: parent.verticalCenter
                 x: Theme.horizontalPageMargin
@@ -104,7 +104,6 @@ Page {
                     visible: (model.rating >= 5) ? true : false
                 }
             }
-           // onClicked: pageStack.push(Qt.resolvedUrl(page))
         }
         PullDownMenu {
             MenuItem {

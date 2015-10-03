@@ -39,8 +39,4 @@ Page {
             }
         }
     }
-
-    onStatusChanged: {
-
-    }
 }
