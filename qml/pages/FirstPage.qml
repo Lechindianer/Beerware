@@ -115,7 +115,7 @@ Page {
             MenuItem {
                 text: "Add Beer"
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("NewBeer.qml"), {dataContainer: root, noteUid: 0})
+                    pageStack.push(Qt.resolvedUrl("NewBeer.qml"), {"listModel": beerModel})
                 }
             }
         }

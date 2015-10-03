@@ -4,38 +4,66 @@ import Sailfish.Silica 1.0
 Page {
     id: newBeerPage
 
+    property BeerModel listModel
+
     SilicaFlickable {
         anchors.fill: parent
 
-        TextField {
-            id: beerName
-
-            anchors.top: parent.top
+        Column {
+            id: column
+            spacing: Theme.paddingMedium
+            //y: Theme.paddingLarge
+            anchors.fill: parent
             anchors.topMargin: 100
-            width: parent.width
 
-            label: qsTr("Beer name")
-            placeholderText: qsTr("New Beer")
-            focus: true
-            EnterKey.onClicked: {
-                console.log(beerName.text)
-                beerType.focus = true;
+            TextField {
+                id: beerName
+
+                //anchors.top: parent.top
+                //anchors.topMargin: 100
+                width: parent.width
+
+                label: qsTr("Beer name")
+                placeholderText: qsTr("New Beer")
+                focus: true
+                EnterKey.onClicked: {
+                    beerType.focus = true;
+                }
             }
-        }
 
-        TextField {
-            id: beerType
+            TextField {
+                id: beerType
+                //anchors.top: beerName.top
+                //anchors.topMargin: 100
+                width: parent.width
 
-            anchors.top: beerName.top
-            anchors.topMargin: 100
-            width: parent.width
+                label: qsTr("Beer type")
+                placeholderText: qsTr("Beer type")
+                focus: true
+                EnterKey.onClicked: {
+                    listModel.append({"name": beerName.text, "section": beerType.text, "rating": 4})
+                    navigateBack()
+                }
+            }
 
-            label: qsTr("Beer type")
-            placeholderText: qsTr("Beer type")
-            focus: true
-            EnterKey.onClicked: {
-                console.log(beerType.text)
-                parent.focus = true;
+            Row {
+                id: row
+                height: Theme.itemSizeMedium
+                anchors.horizontalCenter: parent.horizontalCenter
+
+
+                Repeater {
+                    model: 5
+                    GlassItem {
+                        id: glassItem
+                        property bool dimmed: true
+                        falloffRadius: dimmed ? undefined : 0.075
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: { glassItem.dimmed = !glassItem.dimmed }
+                        }
+                    }
+                }
             }
         }
     }
