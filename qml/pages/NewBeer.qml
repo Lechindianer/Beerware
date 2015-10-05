@@ -53,6 +53,7 @@ Page {
 
 
                 Repeater {
+                    id: repeater
                     model: 5
                     GlassItem {
                         id: glassItem
@@ -60,7 +61,14 @@ Page {
                         falloffRadius: dimmed ? undefined : 0.075
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: { glassItem.dimmed = !glassItem.dimmed }
+                            onClicked: {
+                                for (var i = 0; i <= index; i++) {
+                                    repeater.itemAt(i).dimmed = true
+                                }
+                                for (var i = index+1; i < repeater.count; i++) {
+                                    repeater.itemAt(i).dimmed = false
+                                }
+                            }
                         }
                     }
                 }
