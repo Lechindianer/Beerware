@@ -17,24 +17,27 @@ Page {
     Label {
         id: appName
         anchors.horizontalCenter: parent.horizontalCenter
-        y: page.isPortrait ? 320 : 220
+        //y: page.isPortrait ? 320 : 220
+        anchors.bottom: desc.top
         font.bold: true
-        text: "Noto 1.7"
+        font.pixelSize: Theme.fontSizeLarge
+        text: "Beerware 1.0"
     }
     Text {
         id: desc
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: appName.bottom
+        anchors.bottom: copyright.top
         anchors.topMargin: 20
-        text: "Simple note and todo taking application"
+        text: qsTr("Rate you favourite beers")
         color: "white"
     }
     Text {
         id: copyright
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: desc.bottom
+        //anchors.top: desc.bottom
+        anchors.verticalCenter: parent.verticalCenter
         anchors.topMargin: 20
-        text: "Copyright: Pascal Schmid <br />License: Beerware"
+        text: qsTr("<b>Copyright</b>: Pascal Schmid <br /><b>License</b>: Beerware")
         color: "white"
     }
     Button {
@@ -42,9 +45,9 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: copyright.bottom
         anchors.topMargin: 20
-        text: "<a href=\"https://github.com/llelectronics/noto\">https://github.com/llelectronics/noto</a>"
+        text: "<a href=\"https://github.com/lechindianer/beerware\">Get source code</a>"
         onClicked: {
-            Qt.openUrlExternally("https://github.com/llelectronics/noto")
+            Qt.openUrlExternally("https://github.com/lechindianer/beerware")
         }
     }
 
