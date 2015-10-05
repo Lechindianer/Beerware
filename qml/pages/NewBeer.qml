@@ -15,6 +15,7 @@ Dialog {
         }
 
         listModel.append({"name": beerName.text, "section": beerType.text, "rating": rating})
+        listModel.quick_sort()
     }
 
     Column {

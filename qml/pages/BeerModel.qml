@@ -6,6 +6,11 @@ ListModel {
         name: "Augustiner"
         section: "Helles"
         rating: 5
+    }    
+    ListElement {
+        name: "Franziskaner"
+        section: "Weizen"
+        rating: 5
     }
     ListElement {
         name: "Helles 2"
@@ -13,27 +18,13 @@ ListModel {
         rating: 2
     }
     ListElement {
-        name: "Franziskaner"
-        section: "Weizen"
-        rating: 5
-    }
-    ListElement {
         name: "Weizen 1"
         section: "Weizen"
         rating: 1
     }
-    ListElement {
-        name: "Pils 3"
-        section: "Pils"
-        rating: 3
-    }
-    ListElement {
-        name: "Diebels"
-        section: "Pils"
-        rating: 2
-    }
 
-    property string sortColumnName: ""
+    property string sortColumnNameFirst: "section"
+    property string sortColumnNameSecond: "rating" // TODO: Sort categories according to rating
 
     function swap(a,b) {
         if (a<b) {
@@ -48,12 +39,12 @@ ListModel {
 
     function partition(begin, end, pivot)
     {
-        var piv=get(pivot)[sortColumnName];
+        var piv=get(pivot)[sortColumnNameFirst];
         swap(pivot, end-1);
         var store=begin;
-        var ix;
-        for(ix=begin; ix<end-1; ++ix) {
-            if(get(ix)[sortColumnName] < piv) {
+
+        for(var ix = begin; ix < end-1; ++ix) {
+            if(get(ix)[sortColumnNameFirst] < piv) {
                 swap(store,ix);
                 ++store;
             }
@@ -77,5 +68,9 @@ ListModel {
 
     function quick_sort() {
         qsort(0,count)
+    }
+
+    Component.onCompleted: {
+        quick_sort()
     }
 }
