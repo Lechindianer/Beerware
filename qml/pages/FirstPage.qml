@@ -58,7 +58,7 @@ Page {
                 x: Theme.horizontalPageMargin
             }
 
-            Row {
+            Row { // TODO: Rewrite with Repeater
                 id: row
                 width: parent.width / 3
                 anchors.right: parent.right

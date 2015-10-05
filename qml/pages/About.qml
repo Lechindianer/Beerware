@@ -9,24 +9,25 @@ Page {
 
     Image {
         id: logo
-        source: "noto.png"
+        source: "../../assets/beer1-300px.png"
         anchors.horizontalCenter: parent.horizontalCenter
-        y: page.isPortrait ? 200 : 100
+        anchors.bottom: appName.top // TODO: Different layout for Page in Landscape
+        //y: page.isPortrait ? 200 : 100
     }
 
     Label {
         id: appName
         anchors.horizontalCenter: parent.horizontalCenter
         //y: page.isPortrait ? 320 : 220
-        anchors.bottom: desc.top
+        anchors.verticalCenter: parent.verticalCenter
         font.bold: true
         font.pixelSize: Theme.fontSizeLarge
-        text: "Beerware 1.0"
+        text: "Beerware 0.6"
     }
     Text {
         id: desc
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: copyright.top
+        anchors.top: appName.bottom
         anchors.topMargin: 20
         text: qsTr("Rate you favourite beers")
         color: "white"
@@ -34,8 +35,7 @@ Page {
     Text {
         id: copyright
         anchors.horizontalCenter: parent.horizontalCenter
-        //anchors.top: desc.bottom
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.top: desc.bottom
         anchors.topMargin: 20
         text: qsTr("<b>Copyright</b>: Pascal Schmid <br /><b>License</b>: Beerware")
         color: "white"

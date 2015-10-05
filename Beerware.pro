@@ -27,7 +27,14 @@ OTHER_FILES += qml/Beerware.qml \
     qml/pages/NewBeer.qml \
     qml/pages/About.qml \
     qml/pages/BeerModel.qml \
-    qml/config.js
+    qml/config.js \
+    assets/beer1-300px.png \
+    assets/beer1-800px.png
+
+assets.path = /usr/share/$$TARGET/
+assets.files = assets
+
+INSTALLS += assets
 
 # to disable building translations every time, comment out the
 # following CONFIG line
