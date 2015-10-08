@@ -126,6 +126,13 @@ Page {
                 onClicked: listView.scrollToTop()
             }
         }
+
+        ViewPlaceholder {
+            id: emptyText
+            text: 'No entries'
+            enabled: beerModel.count === 0
+        }
+
         VerticalScrollDecorator {}
     }
 }

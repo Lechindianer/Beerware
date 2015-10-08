@@ -2,26 +2,26 @@ import QtQuick 2.0
 
 ListModel {
 
-    ListElement {
-        name: "Augustiner"
-        section: "Helles"
-        rating: 5
-    }    
-    ListElement {
-        name: "Franziskaner"
-        section: "Weizen"
-        rating: 5
-    }
-    ListElement {
-        name: "Helles 2"
-        section: "Helles"
-        rating: 2
-    }
-    ListElement {
-        name: "Weizen 1"
-        section: "Weizen"
-        rating: 1
-    }
+//    ListElement {
+//        name: "Augustiner"
+//        section: "Helles"
+//        rating: 5
+//    }
+//    ListElement {
+//        name: "Franziskaner"
+//        section: "Weizen"
+//        rating: 5
+//    }
+//    ListElement {
+//        name: "Helles 2"
+//        section: "Helles"
+//        rating: 2
+//    }
+//    ListElement {
+//        name: "Weizen 1"
+//        section: "Weizen"
+//        rating: 1
+//    }
 
     property string sortColumnNameFirst: "section"
     property string sortColumnNameSecond: "rating" // TODO: Sort categories according to rating
