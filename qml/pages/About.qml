@@ -4,7 +4,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: page
-    allowedOrientations: defaultAllowedOrientations
+    allowedOrientations: Orientation.Portrait
 
 
     Image {
