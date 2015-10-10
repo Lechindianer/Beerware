@@ -30,6 +30,8 @@ Dialog {
             label: qsTr("Beer name")
             placeholderText: qsTr("New Beer")
             focus: true
+            EnterKey.enabled: text.length > 0
+            EnterKey.iconSource: "image://theme/icon-m-enter-next"
             EnterKey.onClicked: {
                 beerType.focus = true;
             }
@@ -40,7 +42,11 @@ Dialog {
             width: parent.width
             label: qsTr("Beer type")
             placeholderText: qsTr("Beer type")
-            focus: true
+            EnterKey.enabled: text.length > 0
+            EnterKey.iconSource: "image://theme/icon-m-enter-next"
+            EnterKey.onClicked: {
+                row.focus = true;
+            }
         }
 
         Row {
