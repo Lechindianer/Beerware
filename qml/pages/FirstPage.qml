@@ -13,14 +13,36 @@ Page {
         header: PageHeader {
             title: qsTr("Beerware")
         }
-        section {
+        section { // TODO: rename as category
             property: 'section'
             delegate: SectionHeader {
                 text: section
             }
         }
-        delegate: BackgroundItem {
+        delegate: ListItem {
+            id: listItem
             width: listView.width
+            menu: contextMenu
+            ListView.onRemove: animateRemoval(listItem)
+
+            function remove() {
+                remorseAction("Deleting", function() { beerModel.remove(index) })
+                var db = LS.LocalStorage.openDatabaseSync("Beerware", "0.6", "Beerware LocalStorage Database", 1000000);
+                db.transaction(function(tx) {
+                    var rs = tx.executeSql('DELETE FROM beers WHERE name=? AND category=?;' , [beerModel.get(index).name, beerModel.get(index).section]);
+                })
+            }
+
+            Component {
+                id: contextMenu
+                ContextMenu {
+                    MenuItem {
+                        text: "Remove"
+                        onClicked: remove()
+                    }
+                }
+            }
+
             Label {
                 id: listLabel
                 text: model.name
@@ -115,7 +137,7 @@ Page {
             var db = LS.LocalStorage.openDatabaseSync("Beerware", "0.6", "Beerware LocalStorage Database", 1000000);
             db.transaction(
                 function(tx) {
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS Greeting(salutation TEXT, salutee TEXT)');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS beers(name TEXT, category TEXT, rating INTEGER)');
 
                     var rs = tx.executeSql('SELECT * FROM beers');
 
