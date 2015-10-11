@@ -1,5 +1,6 @@
 import QtQuick 2.0
 
+
 ListModel {
 
     property string sortColumnNameFirst: "section"

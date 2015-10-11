@@ -27,7 +27,6 @@ OTHER_FILES += qml/Beerware.qml \
     qml/pages/NewBeer.qml \
     qml/pages/About.qml \
     qml/pages/BeerModel.qml \
-    qml/config.js \
     assets/beer1-300px.png \
     assets/beer1-800px.png
 

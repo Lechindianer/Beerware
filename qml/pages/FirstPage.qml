@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtQuick.LocalStorage 2.0 as LS
 
 
 Page {
@@ -41,6 +42,7 @@ Page {
                     falloffRadius: 0.2
                     visible: (model.rating >= 1) ? true : false
                 }
+
                 GlassItem {
                     color: "white"
                     width: parent.width / 5
@@ -49,6 +51,7 @@ Page {
                     falloffRadius: 0.2
                     visible: (model.rating >= 2) ? true : false
                 }
+
                 GlassItem {
                     color: "white"
                     width: parent.width / 5
@@ -57,6 +60,7 @@ Page {
                     falloffRadius: 0.2
                     visible: (model.rating >= 3) ? true : false
                 }
+
                 GlassItem {
                     color: "white"
                     width: parent.width / 5
@@ -65,6 +69,7 @@ Page {
                     falloffRadius: 0.2
                     visible: (model.rating >= 4) ? true : false
                 }
+
                 GlassItem {
                     color: "white"
                     width: parent.width / 5
@@ -75,6 +80,7 @@ Page {
                 }
             }
         }
+
         PullDownMenu {
             MenuItem {
                 text: "About"
@@ -82,6 +88,7 @@ Page {
                     pageStack.push(Qt.resolvedUrl("About.qml"), {dataContainer: root})
                 }
             }
+
             MenuItem {
                 text: "Add Beer"
                 onClicked: {
@@ -89,6 +96,7 @@ Page {
                 }
             }
         }
+
         PushUpMenu {
             spacing: Theme.paddingLarge
             MenuItem {

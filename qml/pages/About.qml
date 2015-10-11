@@ -6,7 +6,6 @@ Page {
     id: page
     allowedOrientations: Orientation.Portrait
 
-
     Image {
         id: logo
         source: "../../assets/beer1-300px.png"
@@ -24,6 +23,7 @@ Page {
         font.pixelSize: Theme.fontSizeLarge
         text: "Beerware 0.6"
     }
+
     Text {
         id: desc
         anchors.horizontalCenter: parent.horizontalCenter
@@ -32,6 +32,7 @@ Page {
         text: qsTr("Rate you favourite beers")
         color: "white"
     }
+
     Text {
         id: copyright
         anchors.horizontalCenter: parent.horizontalCenter
@@ -40,6 +41,7 @@ Page {
         text: qsTr("<b>Copyright</b>: Pascal Schmid <br /><b>License</b>: Beerware")
         color: "white"
     }
+
     Button {
         id: homepage
         anchors.horizontalCenter: parent.horizontalCenter
