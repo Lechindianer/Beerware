@@ -21,6 +21,7 @@ Page {
         anchors.verticalCenter: parent.verticalCenter
         font.bold: true
         font.pixelSize: Theme.fontSizeLarge
+        color: Theme.primaryColor
         text: "Beerware 0.6"
     }
 
@@ -30,7 +31,7 @@ Page {
         anchors.top: appName.bottom
         anchors.topMargin: 20
         text: qsTr("Rate you favourite beers")
-        color: "white"
+        color: Theme.primaryColor
     }
 
     Text {
@@ -39,7 +40,7 @@ Page {
         anchors.top: desc.bottom
         anchors.topMargin: 20
         text: qsTr("<b>Copyright</b>: Pascal Schmid <br /><b>License</b>: Beerware")
-        color: "white"
+        color: Theme.primaryColor
     }
 
     Button {

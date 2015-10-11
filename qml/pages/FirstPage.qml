@@ -24,7 +24,7 @@ Page {
             Label {
                 id: listLabel
                 text: model.name
-                color: highlighted ? Theme.highlightColor : Theme.primaryColor
+                color: beerModel.highlighted ? Theme.highlightColor : Theme.primaryColor
                 anchors.verticalCenter: parent.verticalCenter
                 x: Theme.horizontalPageMargin
             }
