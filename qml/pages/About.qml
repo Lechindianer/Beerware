@@ -22,7 +22,7 @@ Page {
         font.bold: true
         font.pixelSize: Theme.fontSizeLarge
         color: Theme.primaryColor
-        text: "Beerware 0.6"
+        text: "Beerware 0.8"
     }
 
     Text {
