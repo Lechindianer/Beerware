@@ -92,37 +92,6 @@ Dialog {
                     }
                 }
             }
-        }        
-    }
-
-    Rectangle {
-        id: buttonPhoto
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: column.bottom
-        anchors.topMargin: 10
-        width: 225
-        height: 400
-
-        border.color: Theme.highlightColor
-        border.width: 4
-        color: "transparent"
-
-        Image {
-            id: image
-            source: ""
-            anchors.fill: parent
-            fillMode: Image.PreserveAspectFit
-
-            MouseArea {
-                anchors.fill: parent
-
-                onClicked: {
-                    var imagePicker = pageStack.push("Sailfish.Pickers.ImagePickerPage");
-                    imagePicker.selectedContentChanged.connect(function() {
-                        image.source = imagePicker.selectedContent;
-                    });
-                }
-            }
         }
     }
 }

@@ -5,7 +5,6 @@ ListModel {
 
     property string sortColumnNameFirst: "section"
     property string sortColumnNameSecond: "rating" // TODO: Sort categories according to rating
-    property bool hasPicture: false
 
     function swap(a,b) {
         if (a<b) {
