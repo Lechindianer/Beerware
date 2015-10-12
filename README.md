@@ -7,3 +7,7 @@ Beerware will make you remember. You can save and rate beers and view a
 sorted list of your tried beers.
 
 The beer icon is by [aungkarns](https://openclipart.org/detail/73591/beer)
+
+## ATTENTION
+This code is one of my first QML/SailfishOS projects so it could eat your
+cat, burn your house or some other catasthrophy. Use with care!
