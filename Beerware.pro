@@ -28,7 +28,8 @@ OTHER_FILES += qml/Beerware.qml \
     qml/pages/About.qml \
     qml/pages/BeerModel.qml \
     assets/beer1-300px.png \
-    assets/beer1-800px.png
+    assets/beer1-800px.png \
+    qml/database.js
 
 assets.path = /usr/share/$$TARGET/
 assets.files = assets

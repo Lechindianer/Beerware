@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import QtQuick.LocalStorage 2.0 as LS
+import "../database.js" as DB
 
 
 Dialog {
@@ -16,24 +16,9 @@ Dialog {
                 rating += 1
         }
 
-        function saveBeer(){
-            listModel.append({"name": beerName.text, "category": beerType.text, "rating": rating})
-            listModel.quick_sort()
-
-            var db = LS.LocalStorage.openDatabaseSync("Beerware", "0.6", "Beerware LocalStorage Database", 1000000);
-            db.transaction(
-                function(tx) {
-                    var rs = tx.executeSql('INSERT OR REPLACE INTO beers VALUES (?,?,?);', [beerName.text, beerType.text, rating]);
-                    if (rs.rowsAffected > 0) {
-                        console.log ("Saved to database");
-                    } else {
-                        console.log ("Error saving to database");
-                    }
-                }
-            )
-        }
-
-        saveBeer()
+        listModel.append({"name": beerName.text, "category": beerType.text, "rating": rating})
+        listModel.quick_sort()
+        DB.saveBeer(beerName.text, beerType.text, rating)
     }
 
     Column {

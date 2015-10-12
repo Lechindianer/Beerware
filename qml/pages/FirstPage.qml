@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import QtQuick.LocalStorage 2.0 as LS
-
+import "../database.js" as DB
 
 Page {
     id: root
@@ -27,10 +26,7 @@ Page {
 
             function remove() {
                 remorseAction("Deleting", function() { beerModel.remove(index) })
-                var db = LS.LocalStorage.openDatabaseSync("Beerware", "0.8", "Beerware LocalStorage Database", 1000000);
-                db.transaction(function(tx) {
-                    var rs = tx.executeSql('DELETE FROM beers WHERE name=? AND category=?;' , [beerModel.get(index).name, beerModel.get(index).category]);
-                })
+                DB.removeBeer(beerModel.get(index).name, beerModel.get(index).category)
             }
 
             Component {
@@ -134,22 +130,14 @@ Page {
         }
 
         Component.onCompleted: {
-            var db = LS.LocalStorage.openDatabaseSync("Beerware", "0.8", "Beerware LocalStorage Database", 1000000);
-            db.transaction(
-                function(tx) {
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS beers(name TEXT, category TEXT, rating INTEGER)');
-
-                    var rs = tx.executeSql('SELECT * FROM beers');
-
-                    for (var i = 0; i < rs.rows.length; i++) {
-                        beerModel.append({"name": rs.rows.item(i).name, "category": rs.rows.item(i).category, "rating": rs.rows.item(i).rating})
-                        //console.debug("Load Beers: " + rs.rows.item(i).name)
-                    }
-                }
-            )
+            DB.loadBeers()
         }
 
         VerticalScrollDecorator {}
+    }
+
+    function addBeer(name, category, rating){
+        beerModel.append({"name": name, "category": category, "rating": rating})
     }
 }
 
