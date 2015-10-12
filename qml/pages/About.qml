@@ -63,7 +63,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: desc.bottom
         anchors.topMargin: Theme.paddingLarge
-        text: qsTr("<b>Copyright</b>: Pascal Schmid <br /><b>License: </b>Beerware (Revision 42)")
+        text: "<b>Copyright</b>: Pascal Schmid <br /><b>License: </b>Beerware (Revision 42)"
         color: Theme.primaryColor
     }
 

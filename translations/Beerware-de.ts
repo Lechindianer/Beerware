@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="de_DE">
 <context>
     <name>About</name>
     <message>
         <source>Rate you favourite beers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Copyright&lt;/b&gt;: Pascal Schmid &lt;br /&gt;&lt;b&gt;License: &lt;/b&gt;Beerware (Revision 42)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerte deine Lieblingsbiere</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
-        <source>Beerware</source>
-        <translation type="unfinished"></translation>
+        <source>Return to Top</source>
+        <translation>Zum Anfang</translation>
     </message>
     <message>
-        <source>Return to Top</source>
-        <translation type="unfinished"></translation>
+        <source>Deleting</source>
+        <translation>Lösche</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Entfernen</translation>
+    </message>
+    <message>
+        <source>No entries</source>
+        <translation>Keine Einträge</translation>
     </message>
 </context>
 <context>
     <name>NewBeer</name>
     <message>
         <source>Beer name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Beer</source>
-        <translation type="unfinished"></translation>
+        <translation>Biername</translation>
     </message>
     <message>
         <source>Beer type</source>
-        <translation type="unfinished"></translation>
+        <translation>Biersorte</translation>
+    </message>
+    <message>
+        <source>New beer</source>
+        <translation>Neues Bier</translation>
     </message>
 </context>
 </TS>

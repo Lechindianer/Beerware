@@ -31,7 +31,7 @@ Dialog {
             id: beerName
             width: parent.width
             label: qsTr("Beer name")
-            placeholderText: qsTr("New Beer")
+            placeholderText: qsTr("New beer")
             focus: true
             EnterKey.enabled: text.length > 0
             EnterKey.iconSource: "image://theme/icon-m-enter-next"

@@ -10,7 +10,7 @@ Page {
         model: BeerModel { id: beerModel }
         anchors.fill: parent
         header: PageHeader {
-            title: qsTr("Beerware")
+            title: "Beerware"
         }
         section {
             property: 'category'
@@ -25,7 +25,7 @@ Page {
             ListView.onRemove: animateRemoval(listItem)
 
             function remove() {
-                remorseAction("Deleting", function() { beerModel.remove(index) })
+                remorseAction(qsTr("Deleting"), function() { beerModel.remove(index) })
                 DB.removeBeer(beerModel.get(index).name, beerModel.get(index).category)
             }
 
@@ -33,7 +33,7 @@ Page {
                 id: contextMenu
                 ContextMenu {
                     MenuItem {
-                        text: "Remove"
+                        text: qsTr("Remove")
                         onClicked: remove()
                     }
                 }
@@ -51,6 +51,7 @@ Page {
                 id: row
                 width: parent.width / 3
                 anchors.right: parent.right
+                anchors.rightMargin: 5
                 anchors.verticalCenter: parent.verticalCenter
                 GlassItem {
                     color: "white"
@@ -108,7 +109,7 @@ Page {
             }
 
             MenuItem {
-                text: "Add Beer"
+                text: "Add beer"
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("NewBeer.qml"), {"listModel": beerModel})
                 }
@@ -125,7 +126,7 @@ Page {
 
         ViewPlaceholder {
             id: emptyText
-            text: 'No entries'
+            text: qsTr('No entries')
             enabled: beerModel.count === 0
         }
 
