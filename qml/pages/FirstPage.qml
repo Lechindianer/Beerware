@@ -43,12 +43,54 @@ Page {
                 }
             }
 
+            Rectangle {
+                id: rect
+                border.color: Theme.highlightColor
+                border.width: 4
+                color: "transparent"
+                visible: beerModel.hasPicture
+
+                state: "minimized"
+
+                MouseArea {
+                    anchors.fill: parent
+
+                    onClicked: {
+                        if (rect.state === "minimized")
+                            rect.state = "maximized"
+                        else
+                            rect.state = "minimized"
+                    }
+                }
+                states: [
+                    State {
+                        name: "minimized"
+                        PropertyChanges {
+                            target: rect
+                            height: listItem.height
+                            width: 60
+                        }
+                    },
+                    State {
+                        name: "maximized"
+                        PropertyChanges {
+                            target: rect
+                            height: root.height - 200
+                            width: root.width - 100
+                            x: root.width/2 - width/2
+                            y: root.height/2 - height/2 - 175
+                        }
+                    }
+                ]
+            }
+
             Label {
                 id: listLabel
                 text: model.name
                 color: beerModel.highlighted ? Theme.highlightColor : Theme.primaryColor
+                anchors.left: parent.left
+                anchors.leftMargin: rect.visible ? 75 : 10
                 anchors.verticalCenter: parent.verticalCenter
-                x: Theme.horizontalPageMargin
             }
 
             Row { // TODO: Rewrite with Repeater
