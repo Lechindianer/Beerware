@@ -10,18 +10,42 @@ Page {
         id: logo
         source: "../../assets/beer1-300px.png"
         anchors.horizontalCenter: parent.horizontalCenter
-       // anchors.bottom: appName.top // TODO: Different layout for Page in Landscape
+        anchors.bottom: appName.top // TODO: Different layout for Page in Landscape
+        anchors.bottomMargin: 50
 
+        state: "default"
+        states: [State {
+            name: "rotated"
+            PropertyChanges { target: logo; rotation: 180 }
+        },
+        State {
+            name: "default"
+            PropertyChanges { target: logo; rotation: 360 }
+        }]
+
+        transitions: Transition {
+            RotationAnimation { duration: 500; direction: RotationAnimation.Counterclockwise }
+        }
+
+        MouseArea {
+            anchors.fill: parent;
+            onClicked: {
+                if (logo.state === "default")
+                    logo.state = "rotated"
+                else {
+                    logo.state = "default"
+                }
+            }
+        }
     }
 
     Label {
         id: appName
         anchors.horizontalCenter: parent.horizontalCenter
-        //y: page.isPortrait ? 320 : 220
         anchors.verticalCenter: parent.verticalCenter
         font.bold: true
         font.pixelSize: Theme.fontSizeLarge
-        color: Theme.primaryColor
+        color: Theme.highlightColor
         text: "Beerware 0.8"
     }
 
@@ -29,7 +53,7 @@ Page {
         id: desc
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: appName.bottom
-        anchors.topMargin: 20
+        anchors.topMargin: Theme.paddingLarge
         text: qsTr("Rate you favourite beers")
         color: Theme.primaryColor
     }
@@ -38,8 +62,7 @@ Page {
         id: copyright
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: desc.bottom
-        anchors.topMargin: 20
-        textFormat: Text.RichText
+        anchors.topMargin: Theme.paddingLarge
         text: qsTr("<b>Copyright</b>: Pascal Schmid <br /><b>License: </b>Beerware (Revision 42)")
         color: Theme.primaryColor
     }
@@ -48,8 +71,8 @@ Page {
         id: homepage
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: copyright.bottom
-        anchors.topMargin: 20
-        text: "<a href=\"https://github.com/lechindianer/beerware\">Get source code</a>"
+        anchors.topMargin: Theme.paddingLarge
+        text: "Github repo mirror"
         onClicked: {
             Qt.openUrlExternally("https://github.com/lechindianer/beerware")
         }
