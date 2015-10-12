@@ -13,8 +13,8 @@ Page {
         header: PageHeader {
             title: qsTr("Beerware")
         }
-        section { // TODO: rename as category
-            property: 'section'
+        section {
+            property: 'category'
             delegate: SectionHeader {
                 text: section
             }
@@ -27,9 +27,9 @@ Page {
 
             function remove() {
                 remorseAction("Deleting", function() { beerModel.remove(index) })
-                var db = LS.LocalStorage.openDatabaseSync("Beerware", "0.6", "Beerware LocalStorage Database", 1000000);
+                var db = LS.LocalStorage.openDatabaseSync("Beerware", "0.8", "Beerware LocalStorage Database", 1000000);
                 db.transaction(function(tx) {
-                    var rs = tx.executeSql('DELETE FROM beers WHERE name=? AND category=?;' , [beerModel.get(index).name, beerModel.get(index).section]);
+                    var rs = tx.executeSql('DELETE FROM beers WHERE name=? AND category=?;' , [beerModel.get(index).name, beerModel.get(index).category]);
                 })
             }
 
@@ -176,7 +176,7 @@ Page {
         }
 
         Component.onCompleted: {
-            var db = LS.LocalStorage.openDatabaseSync("Beerware", "0.6", "Beerware LocalStorage Database", 1000000);
+            var db = LS.LocalStorage.openDatabaseSync("Beerware", "0.8", "Beerware LocalStorage Database", 1000000);
             db.transaction(
                 function(tx) {
                     tx.executeSql('CREATE TABLE IF NOT EXISTS beers(name TEXT, category TEXT, rating INTEGER)');
@@ -184,8 +184,8 @@ Page {
                     var rs = tx.executeSql('SELECT * FROM beers');
 
                     for (var i = 0; i < rs.rows.length; i++) {
-                        beerModel.append({"name": rs.rows.item(i).name, "section": rs.rows.item(i).category, "rating": rs.rows.item(i).rating})
-                        console.debug("Load Beers: " + rs.rows.item(i).name)
+                        beerModel.append({"name": rs.rows.item(i).name, "category": rs.rows.item(i).category, "rating": rs.rows.item(i).rating})
+                        //console.debug("Load Beers: " + rs.rows.item(i).name)
                     }
                 }
             )

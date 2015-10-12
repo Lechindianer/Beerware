@@ -17,7 +17,7 @@ Dialog {
         }
 
         function saveBeer(){
-            listModel.append({"name": beerName.text, "section": beerType.text, "rating": rating})
+            listModel.append({"name": beerName.text, "category": beerType.text, "rating": rating})
             listModel.quick_sort()
 
             var db = LS.LocalStorage.openDatabaseSync("Beerware", "0.6", "Beerware LocalStorage Database", 1000000);
