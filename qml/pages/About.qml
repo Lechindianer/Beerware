@@ -10,8 +10,8 @@ Page {
         id: logo
         source: "../../assets/beer1-300px.png"
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: appName.top // TODO: Different layout for Page in Landscape
-        //y: page.isPortrait ? 200 : 100
+       // anchors.bottom: appName.top // TODO: Different layout for Page in Landscape
+
     }
 
     Label {
@@ -39,7 +39,8 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: desc.bottom
         anchors.topMargin: 20
-        text: qsTr("<b>Copyright</b>: Pascal Schmid <br /><b>License</b>: Beerware")
+        textFormat: Text.RichText
+        text: qsTr("<b>Copyright</b>: Pascal Schmid <br /><b>License: </b>Beerware (Revision 42)")
         color: Theme.primaryColor
     }
 
