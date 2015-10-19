@@ -10,31 +10,26 @@
 #   - translation filenames have to be changed
 
 # The name of your application
-TARGET = Beerware
+TARGET = harbour-beerware
 
 CONFIG += sailfishapp
 
-SOURCES += src/Beerware.cpp
+SOURCES += src/harbour-beerware.cpp
 
-OTHER_FILES += qml/Beerware.qml \
+OTHER_FILES += qml/harbour-beerware.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
-    rpm/Beerware.changes.in \
-    rpm/Beerware.spec \
-    rpm/Beerware.yaml \
+    rpm/harbour-beerware.changes.in \
+    rpm/harbour-beerware.spec \
+    rpm/harbour-beerware.yaml \
     translations/*.ts \
-    Beerware.desktop \
+    harbour-beerware.desktop \
     qml/pages/NewBeer.qml \
     qml/pages/About.qml \
     qml/pages/BeerModel.qml \
-    assets/beer1-300px.png \
-    assets/beer1-800px.png \
     qml/database.js
 
-assets.path = /usr/share/$$TARGET/
-assets.files = assets
-
-INSTALLS += assets
+RESOURCES += harbour-beerware.qrc
 
 # to disable building translations every time, comment out the
 # following CONFIG line
@@ -45,4 +40,3 @@ CONFIG += sailfishapp_i18n
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/Beerware-de.ts
-

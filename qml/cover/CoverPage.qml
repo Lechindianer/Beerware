@@ -32,20 +32,9 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 CoverBackground {
-//    Image {
-//        anchors.margins: Theme.paddingMedium
-//        anchors.top: parent.top
-//        anchors.bottom: header.top
-//        anchors.left: parent.left
-//        anchors.right: parent.right
-//        fillMode: Image.PreserveAspectFit
-//        source: "qrc:///logo.png"
-//        z: imageGrid.z + 1
-//    }
-
     Image {
         anchors.fill: parent
-        source: "../../assets/beer1-800px.png"
+        source: "qrc:///harbour-beerware/beer-300.png"
         opacity: 0.5
     }
 

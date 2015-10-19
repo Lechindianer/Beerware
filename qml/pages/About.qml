@@ -3,12 +3,13 @@ import Sailfish.Silica 1.0
 
 
 Page {
+
     id: aboutPage
     allowedOrientations: Orientation.Portrait
 
     Image {
         id: logo
-        source: "../../assets/beer1-300px.png"
+        source: "qrc:///harbour-beerware/beer-300.png"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: appName.top // TODO: Different layout for Page in Landscape
         anchors.bottomMargin: 50
