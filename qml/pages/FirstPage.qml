@@ -10,7 +10,8 @@ Page {
     SilicaListView {
         id: listView
         model: BeerModel { id: beerModel }
-        anchors.fill: parent
+        width: root.width
+        height: root.height
         header: PageHeader {
             title: "Beerware"
         }
@@ -31,75 +32,92 @@ Page {
                 DB.removeBeer(beerModel.get(index).name, beerModel.get(index).category)
             }
 
-            Component {
-                id: contextMenu
-                ContextMenu {
-                    MenuItem {
-                        text: qsTr("Remove")
-                        onClicked: remove()
+            BackgroundItem {
+                id: contentItem
+                anchors.fill: parent
+
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("ChangeBeer.qml"),
+                                   {
+                                       listModel: beerModel,
+                                       oldBeerName: beerModel.get(index).name,
+                                       oldBeerType: beerModel.get(index).category,
+                                       oldBeerRating: beerModel.get(index).rating
+                                   })
+                }
+
+                Component {
+                    id: contextMenu
+                    ContextMenu {
+                        MenuItem {
+                            text: qsTr("Remove")
+                            onClicked: remove()
+                        }
+                    }
+                }
+
+                Label {
+                    id: listLabel
+                    text: model.name
+                    color: beerModel.highlighted ? Theme.highlightColor : Theme.primaryColor
+                    anchors.verticalCenter: parent.verticalCenter
+                    x: Theme.horizontalPageMargin
+                }
+
+                Row {
+                    id: row
+                    width: parent.width / 3
+                    anchors.right: parent.right
+                    anchors.rightMargin: 5
+                    anchors.verticalCenter: parent.verticalCenter
+                    GlassItem {
+                        color: "white"
+                        width: parent.width / 5
+                        height: parent.width / 5
+                        radius: 4
+                        falloffRadius: 0.2
+                        visible: (model.rating >= 1) ? true : false
+                    }
+
+                    GlassItem {
+                        color: "white"
+                        width: parent.width / 5
+                        height: parent.width / 5
+                        radius: 4
+                        falloffRadius: 0.2
+                        visible: (model.rating >= 2) ? true : false
+                    }
+
+                    GlassItem {
+                        color: "white"
+                        width: parent.width / 5
+                        height: parent.width / 5
+                        radius: 4
+                        falloffRadius: 0.2
+                        visible: (model.rating >= 3) ? true : false
+                    }
+
+                    GlassItem {
+                        color: "white"
+                        width: parent.width / 5
+                        height: parent.width / 5
+                        radius: 4
+                        falloffRadius: 0.2
+                        visible: (model.rating >= 4) ? true : false
+                    }
+
+                    GlassItem {
+                        color: "white"
+                        width: parent.width / 5
+                        height: parent.width / 5
+                        radius: 4
+                        falloffRadius: 0.2
+                        visible: (model.rating >= 5) ? true : false
                     }
                 }
             }
 
-            Label {
-                id: listLabel
-                text: model.name
-                color: beerModel.highlighted ? Theme.highlightColor : Theme.primaryColor
-                anchors.verticalCenter: parent.verticalCenter
-                x: Theme.horizontalPageMargin
-            }
 
-            Row { // TODO: Rewrite with Repeater
-                id: row
-                width: parent.width / 3
-                anchors.right: parent.right
-                anchors.rightMargin: 5
-                anchors.verticalCenter: parent.verticalCenter
-                GlassItem {
-                    color: "white"
-                    width: parent.width / 5
-                    height: parent.width / 5
-                    radius: 4
-                    falloffRadius: 0.2
-                    visible: (model.rating >= 1) ? true : false
-                }
-
-                GlassItem {
-                    color: "white"
-                    width: parent.width / 5
-                    height: parent.width / 5
-                    radius: 4
-                    falloffRadius: 0.2
-                    visible: (model.rating >= 2) ? true : false
-                }
-
-                GlassItem {
-                    color: "white"
-                    width: parent.width / 5
-                    height: parent.width / 5
-                    radius: 4
-                    falloffRadius: 0.2
-                    visible: (model.rating >= 3) ? true : false
-                }
-
-                GlassItem {
-                    color: "white"
-                    width: parent.width / 5
-                    height: parent.width / 5
-                    radius: 4
-                    falloffRadius: 0.2
-                    visible: (model.rating >= 4) ? true : false
-                }
-
-                GlassItem {
-                    color: "white"
-                    width: parent.width / 5
-                    height: parent.width / 5
-                    radius: 4
-                    falloffRadius: 0.2
-                    visible: (model.rating >= 5) ? true : false
-                }
-            }
         }
 
         PullDownMenu {
