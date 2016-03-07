@@ -9,6 +9,7 @@ Dialog {
     property string oldBeerName
     property string oldBeerType
     property int oldBeerRating
+    property string uID
 
     DialogHeader { id: header }
 
@@ -19,9 +20,9 @@ Dialog {
                 rating += 1
         }
 
-        listModel.append({"name": beerName.text, "category": beerType.text, "rating": rating})
+        listModel.set(uID, {"name": beerName.text, "category": beerType.text, "rating": rating})
         listModel.quick_sort()
-        DB.saveBeer(beerName.text, beerType.text, rating)
+        DB.changeBeer(uID, beerName.text, beerType.text, rating)
     }
 
     Column {
@@ -78,7 +79,8 @@ Dialog {
                             }
                         }
                         Component.onCompleted: {
-                            for (var i = 0; i < oldBeerRating; i++) {
+                            console.log(oldBeerName + ": " + oldBeerRating)
+                            for (var i = 0; i <= oldBeerRating; i++) {
                                 repeater.itemAt(i).dimmed = true
                             }
                         }

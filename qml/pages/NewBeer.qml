@@ -18,7 +18,8 @@ Dialog {
 
         listModel.append({"name": beerName.text, "category": beerType.text, "rating": rating})
         listModel.quick_sort()
-        DB.saveBeer(beerName.text, beerType.text, rating)
+        var dbUID = DB.getUID()
+        DB.saveBeer(dbUID, beerName.text, beerType.text, rating)
     }
 
     Column {

@@ -24,12 +24,15 @@ Page {
         delegate: ListItem {
             id: listItem
             width: listView.width
-            menu: contextMenu
             ListView.onRemove: animateRemoval(listItem)
+
+            property Item contextMenu
+            property bool menuOpen: contextMenu != null && contextMenu.parent === listItem
+            height: menuOpen ? contextMenu.height + contentItem.height : contentItem.height
 
             function remove() {
                 remorseAction(qsTr("Deleting"), function() { beerModel.remove(index) })
-                DB.removeBeer(beerModel.get(index).name, beerModel.get(index).category)
+                DB.removeBeer(beerModel.get(index).uid)
             }
 
             BackgroundItem {
@@ -42,19 +45,18 @@ Page {
                                        listModel: beerModel,
                                        oldBeerName: beerModel.get(index).name,
                                        oldBeerType: beerModel.get(index).category,
-                                       oldBeerRating: beerModel.get(index).rating
+                                       oldBeerRating: beerModel.get(index).rating,
+                                       uID: beerModel.get(index).uid
                                    })
                 }
 
-                Component {
-                    id: contextMenu
-                    ContextMenu {
-                        MenuItem {
-                            text: qsTr("Remove")
-                            onClicked: remove()
-                        }
+                onPressAndHold: {
+                    if (!contextMenu) {
+                        contextMenu = contextMenuComponent.createObject(listItem)
                     }
+                    contextMenu.show(contentItem)
                 }
+
 
                 Label {
                     id: listLabel
@@ -117,6 +119,17 @@ Page {
                 }
             }
 
+            Component {
+                id: contextMenuComponent
+                ContextMenu {
+                    id: menu
+                    MenuItem {
+                        text: qsTr("Remove")
+                        onClicked: remove()
+                    }
+                }
+            }
+
 
         }
 
@@ -157,8 +170,8 @@ Page {
         VerticalScrollDecorator {}
     }
 
-    function addBeer(name, category, rating){
-        beerModel.append({"name": name, "category": category, "rating": rating})
+    function addBeer(uid, name, category, rating){
+        beerModel.append({"uid": uid ,"name": name, "category": category, "rating": rating})
     }
 }
 
