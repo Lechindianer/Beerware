@@ -16,10 +16,18 @@ Dialog {
                 rating += 1
         }
 
-        listModel.append({"name": beerName.text, "category": beerType.text, "rating": rating})
-        listModel.quick_sort()
-        var dbUID = DB.getUID()
-        DB.saveBeer(dbUID, beerName.text, beerType.text, rating)
+        var newBeer = {"name": beerName.text, "category": beerType.text, "rating": rating};
+
+        // Check if newbeer is already in listModel. If yes, don't show it
+        var length = listModel.count, i;
+        for(i = 0; i<length; i++) {
+            if (listModel.get(i).name == newBeer.name && listModel.get(i).category == newBeer.category && listModel.get(i).rating === newBeer.rating) {
+                return;
+            }
+        }
+        listModel.append(newBeer)
+        listModel.quick_sort();
+        DB.saveBeer(beerName.text, beerType.text, rating);
     }
 
     Column {
