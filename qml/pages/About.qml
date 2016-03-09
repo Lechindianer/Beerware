@@ -47,7 +47,7 @@ Page {
         font.bold: true
         font.pixelSize: Theme.fontSizeLarge
         color: Theme.highlightColor
-        text: "Beerware 0.8"
+        text: "Beerware 0.8.2"
     }
 
     Text {
