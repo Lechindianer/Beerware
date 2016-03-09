@@ -32,7 +32,7 @@ Page {
 
             function remove() {
                 remorseAction(qsTr("Deleting"), function() { beerModel.remove(index) })
-                DB.removeBeer(beerModel.get(index).uid)
+                DB.removeBeer(beerModel.get(index).rowID)
             }
 
             BackgroundItem {
@@ -46,7 +46,7 @@ Page {
                                        oldBeerName: beerModel.get(index).name,
                                        oldBeerType: beerModel.get(index).category,
                                        oldBeerRating: beerModel.get(index).rating,
-                                       uID: beerModel.get(index).uid
+                                       rowID: beerModel.get(index).rowID
                                    })
                 }
 
@@ -170,8 +170,8 @@ Page {
         VerticalScrollDecorator {}
     }
 
-    function addBeer(uid, name, category, rating){
-        beerModel.append({"uid": uid ,"name": name, "category": category, "rating": rating})
+    function addBeer(rowID, name, category, rating){
+        beerModel.append({"rowID": rowID ,"name": name, "category": category, "rating": rating})
     }
 }
 

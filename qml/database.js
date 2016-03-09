@@ -2,20 +2,54 @@
 .import QtQuick.LocalStorage 2.0 as LS
 
 function getDatabase() {
-    var DB = LS.LocalStorage.openDatabaseSync("Beerware", "0.8.1", "Beerware L Database", 10000);
 
-    if(DB.version == '0.8.1') {
-        DB.transaction(function(tx) {
-             tx.executeSql('CREATE TABLE IF NOT EXISTS beers(uid LONGVARCHAR UNIQUE, name TEXT, category TEXT, rating INTEGER)');
-        })
-    } else if(DB.version != '0.8.1') {
-        DB.changeVersion('0.8', '0.8.1', function(tx) {
+    var db = LS.LocalStorage.openDatabaseSync("Beerware", "", "Beerware LS Database", 100000,
+                function(db) {
+                    db.changeVersion("","0.8.2")
+                    db.transaction(function(tx){
+                        tx.executeSql('CREATE TABLE IF NOT EXISTS beers(name TEXT, category TEXT, rating INTEGER), PRIMARY KEY (name, category, rating) ON CONFLICT REPLACE');
+                    })
+                });
+
+    db = LS.LocalStorage.openDatabaseSync("Beerware", "", "Beerware LS Database", 100000);
+
+    if (db.version === "0.8") {
+        db.changeVersion("0.8","0.8.2",function(tx)
+            {
+            console.log("version 0.8 ==> 0.8.2")
+            tx.executeSql('DROP TABLE beers')
+            tx.executeSql('CREATE TABLE IF NOT EXISTS beers(name TEXT, category TEXT, rating INTEGER), PRIMARY KEY (name, category, rating) ON CONFLICT REPLACE');
+            });
+    }
+    if (db.version === "0.8.1") {
+        db.changeVersion("0.8.1","0.8.2",function(tx)
+            {
+            console.log("version 0.8.1 ==> 0.8.2");
             tx.executeSql('DROP TABLE beers');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS beers(uid LONGVARCHAR UNIQUE, name TEXT, category TEXT, rating INTEGER)');
-        });
+            tx.executeSql('CREATE TABLE IF NOT EXISTS beers(name TEXT, category TEXT, rating INTEGER), PRIMARY KEY (name, category, rating) ON CONFLICT REPLACE');
+            });
     }
 
-    return DB;
+    db = LS.LocalStorage.openDatabaseSync("Beerware", "0.8.2", "Beerware LS Database", 100000);
+    db.transaction(function(tx) {
+         tx.executeSql('CREATE TABLE IF NOT EXISTS beers(name TEXT, category TEXT, rating INTEGER, PRIMARY KEY (name, category, rating) ON CONFLICT REPLACE)');
+    });
+
+ /*   var db = LS.openDatabaseSync("Beerware", "", "Beerware LS Database", 100000,
+      function(db) {
+          db.changeVersion("0.8.1","0.8.2")
+          db.transaction(function(tx){
+              tx.executeSql('DROP TABLE beers');
+              tx.executeSql('CREATE TABLE IF NOT EXISTS beers(name TEXT, category TEXT, rating INTEGER), PRIMARY KEY (name, category, rating) ON CONFLICT REPLACE');
+          })
+      });
+
+    db = LS.openDatabaseSync("Beerware", "0.8.2", "Beerware LS Database", 100000)
+    db.transaction(function(tx) {
+         tx.executeSql('CREATE TABLE IF NOT EXISTS beers(name TEXT, category TEXT, rating INTEGER, PRIMARY KEY (name, category, rating) ON CONFLICT REPLACE)');
+    });*/
+
+    return db;
 }
 
 function getUID()
@@ -33,31 +67,31 @@ function loadBeers(){
     DB.transaction(function(tx) {
         var rs = tx.executeSql('SELECT * FROM beers');
         for (var i = 0; i < rs.rows.length; i++) {
-           root.addBeer(rs.rows.item(i).uid, rs.rows.item(i).name, rs.rows.item(i).category, rs.rows.item(i).rating);
+           root.addBeer(rs.rows.item(i).rowid, rs.rows.item(i).name, rs.rows.item(i).category, rs.rows.item(i).rating);
         }
     })
 }
 
-function saveBeer(uid, name, category, rating){
+function saveBeer(name, category, rating){
     var DB = getDatabase();
 
     DB.transaction(function(tx) {
-        var rs = tx.executeSql('INSERT OR REPLACE INTO beers VALUES (?,?,?,?)', [uid, name, category, rating]);
+        var rs = tx.executeSql('INSERT OR IGNORE INTO beers VALUES (?,?,?)', [name, category, rating]);
     })
 }
 
-function changeBeer(uid, name, category, rating){
+function changeBeer(rowid, name, category, rating){
     var DB = getDatabase();
 
     DB.transaction(function(tx) {
-        var rs = tx.executeSql('REPLACE INTO beers VALUES (?,?,?,?)', [uid, name, category, rating]);
+        var rs = tx.executeSql('REPLACE INTO beers VALUES (?,?,?,?)', [rowid, name, category, rating]);
     })
 }
 
-function removeBeer(uid){
+function removeBeer(rowid){
     var DB = getDatabase();
 
     DB.transaction(function(tx) {
-        var rs = tx.executeSql('DELETE FROM beers WHERE uid=?' , [uid]);
+        var rs = tx.executeSql('DELETE FROM beers WHERE rowid=?' , [rowid]);
     })
 }
