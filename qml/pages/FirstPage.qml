@@ -32,7 +32,7 @@ Page {
 
             function remove() {
                 remorseAction(qsTr("Deleting"), function() { beerModel.remove(index) })
-                DB.removeBeer(beerModel.get(index).rowID)
+                DB.removeBeer(beerModel.get(index).uID)
             }
 
             BackgroundItem {
@@ -43,10 +43,11 @@ Page {
                     pageStack.push(Qt.resolvedUrl("ChangeBeer.qml"),
                                    {
                                        listModel: beerModel,
+                                       index: index,
                                        oldBeerName: beerModel.get(index).name,
                                        oldBeerType: beerModel.get(index).category,
                                        oldBeerRating: beerModel.get(index).rating,
-                                       rowID: beerModel.get(index).rowID
+                                       uID: beerModel.get(index).uID
                                    })
                 }
 
@@ -170,8 +171,8 @@ Page {
         VerticalScrollDecorator {}
     }
 
-    function addBeer(rowID, name, category, rating){
-        beerModel.append({"rowID": rowID ,"name": name, "category": category, "rating": rating})
+    function addBeer(uID, name, category, rating){
+        beerModel.append({"uID": uID ,"name": name, "category": category, "rating": rating})
     }
 }
 

@@ -6,10 +6,11 @@ import "../database.js" as DB
 Dialog {
 
     property BeerModel listModel
+    property int index
     property string oldBeerName
     property string oldBeerType
     property int oldBeerRating
-    property string rowID
+    property int uID
 
     DialogHeader { id: header }
 
@@ -19,10 +20,9 @@ Dialog {
             if (repeater.itemAt(i).dimmed === true)
                 rating += 1
         }
-
-        listModel.set(rowID, {"name": beerName.text, "category": beerType.text, "rating": rating})
+        listModel.set(index, {"uID": uID, "name": beerName.text, "category": beerType.text, "rating": rating})
         listModel.quick_sort()
-        DB.changeBeer(rowID, beerName.text, beerType.text, rating)
+        DB.changeBeer(uID, beerName.text, beerType.text, rating)
     }
 
     Column {
@@ -81,10 +81,10 @@ Dialog {
                     }
                 }
             }
-        }
-        Component.onCompleted: {
-            for (var i = 0; i <= oldBeerRating; i++) {
-                repeater.itemAt(i).dimmed = true
+            Component.onCompleted: {
+                for (var i = 0; i < oldBeerRating; i++) {
+                    repeater.itemAt(i).dimmed = true
+                }
             }
         }
     }
