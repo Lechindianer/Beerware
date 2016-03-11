@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_US">
+<TS version="2.0" language="en_US">
 <context>
     <name>About</name>
     <message>
         <source>Rate you favourite beers</source>
         <translation>Rate your favourite beers</translation>
+    </message>
+</context>
+<context>
+    <name>ChangeBeer</name>
+    <message>
+        <source>Beer name</source>
+        <translation>Beer name</translation>
+    </message>
+    <message>
+        <source>Beer type</source>
+        <translation>Beer type</translation>
     </message>
 </context>
 <context>

@@ -55,7 +55,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: appName.bottom
         anchors.topMargin: Theme.paddingLarge
-        text: qsTr("Rate you favourite beers")
+        text: qsTr("Rate your favourite beers")
         color: Theme.primaryColor
     }
 

@@ -1,54 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.0" language="de_DE">
 <context>
     <name>About</name>
     <message>
         <location filename="../qml/pages/About.qml" line="58"/>
         <source>Rate you favourite beers</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerte deine Lieblingsbiere</translation>
+    </message>
+</context>
+<context>
+    <name>ChangeBeer</name>
+    <message>
+        <location filename="../qml/pages/ChangeBeer.qml" line="37"/>
+        <source>Beer name</source>
+        <translation>Biername</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ChangeBeer.qml" line="50"/>
+        <source>Beer type</source>
+        <translation>Biersorte</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="30"/>
+        <location filename="../qml/pages/FirstPage.qml" line="34"/>
         <source>Deleting</source>
-        <translation type="unfinished"></translation>
+        <translation>Lösche</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="38"/>
+        <location filename="../qml/pages/FirstPage.qml" line="128"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="124"/>
+        <location filename="../qml/pages/FirstPage.qml" line="156"/>
         <source>Return to Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Zum Anfang</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="131"/>
+        <location filename="../qml/pages/FirstPage.qml" line="163"/>
         <source>No entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Einträge</translation>
     </message>
 </context>
 <context>
     <name>NewBeer</name>
     <message>
-        <location filename="../qml/pages/NewBeer.qml" line="33"/>
+        <location filename="../qml/pages/NewBeer.qml" line="42"/>
         <source>Beer name</source>
-        <translation type="unfinished"></translation>
+        <translation>Biername</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewBeer.qml" line="34"/>
+        <location filename="../qml/pages/NewBeer.qml" line="43"/>
         <source>New beer</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Bier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewBeer.qml" line="46"/>
-        <location filename="../qml/pages/NewBeer.qml" line="47"/>
+        <location filename="../qml/pages/NewBeer.qml" line="55"/>
+        <location filename="../qml/pages/NewBeer.qml" line="56"/>
         <source>Beer type</source>
-        <translation type="unfinished"></translation>
+        <translation>Biersorte</translation>
     </message>
 </context>
 </TS>
