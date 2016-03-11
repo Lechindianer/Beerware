@@ -4,7 +4,7 @@
 <context>
     <name>About</name>
     <message>
-        <source>Rate you favourite beers</source>
+        <source>Rate your favourite beers</source>
         <translation>Rate your favourite beers</translation>
     </message>
 </context>

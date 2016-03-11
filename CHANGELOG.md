@@ -6,7 +6,6 @@ CHANGELOG
 - Database model changed
 - It's possible to change data sets
 
-
 0.8
 ---
 - Initial release

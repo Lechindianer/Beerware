@@ -19,7 +19,7 @@ SOURCES += src/harbour-beerware.cpp
 OTHER_FILES += qml/harbour-beerware.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
-    rpm/harbour-beerware.changes.in \
+    rpm/harbour-beerware.changes \
     rpm/harbour-beerware.spec \
     rpm/harbour-beerware.yaml \
     translations/*.ts \

@@ -5,7 +5,7 @@
     <name>About</name>
     <message>
         <location filename="../qml/pages/About.qml" line="58"/>
-        <source>Rate you favourite beers</source>
+        <source>Rate your favourite beers</source>
         <translation>Bewerte deine Lieblingsbiere</translation>
     </message>
 </context>

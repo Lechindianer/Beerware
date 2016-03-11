@@ -8,8 +8,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Sun Apr 13 2014 Jack Tar <jack.tar@example.com> 0.0.1-1
-- Scrubbed the deck
-- Hoisted the sails
+* Fri Mar 11 2016 Pascal Schmid <psschmid@gmx.de> 0.8.2
+- Database model changed
+- It's possible to change data sets
 
 
+* Sun Mar 06 2016 Pascal Schmid <psschmid@gmx.de> 0.8
+- Initial release
