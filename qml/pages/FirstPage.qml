@@ -9,78 +9,57 @@ Page {
 
     SilicaListView {
         id: listView
+        anchors.fill: parent
         model: BeerModel { id: beerModel }
-        width: root.width
-        height: root.height
         header: PageHeader {
             title: "Beerware"
         }
+
         section {
-            property: 'category'
+            property: "category"
             delegate: SectionHeader {
                 text: section
             }
         }
+
         delegate: ListItem {
             id: listItem
             width: listView.width
             ListView.onRemove: animateRemoval(listItem)
 
-            property Item contextMenu
-            property bool menuOpen: contextMenu != null && contextMenu.parent === listItem
-            height: menuOpen ? contextMenu.height + contentItem.height : contentItem.height
+            onClicked: pageStack.push(Qt.resolvedUrl("ChangeBeer.qml"), {
+                                          listModel: beerModel,
+                                          index: index,
+                                          oldBeerName: beerModel.get(index).name,
+                                          oldBeerType: beerModel.get(index).category,
+                                          oldBeerRating: beerModel.get(index).rating,
+                                          uID: beerModel.get(index).uID
+                                      })
 
-            function remove() {
-                remorseAction(qsTr("Deleting"), function() { beerModel.remove(index) })
-                DB.removeBeer(beerModel.get(index).uID)
+            Label {
+                id: listLabel
+                anchors {
+                    left: parent.left
+                    leftMargin: Theme.horizontalPageMargin
+                    verticalCenter: parent.verticalCenter
+                }
+                text: model.name
+                color: beerModel.highlighted || contextMenu.active ?
+                           Theme.highlightColor : Theme.primaryColor
             }
 
-            BackgroundItem {
-                id: contentItem
-                anchors.fill: parent
+            Row {
+                id: row
+                width: parent.width / 3
+                anchors {
+                    right: parent.right
+                    rightMargin: Theme.horizontalPageMargin
+                    verticalCenter: parent.verticalCenter
+                }                
 
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("ChangeBeer.qml"),
-                                   {
-                                       listModel: beerModel,
-                                       index: index,
-                                       oldBeerName: beerModel.get(index).name,
-                                       oldBeerType: beerModel.get(index).category,
-                                       oldBeerRating: beerModel.get(index).rating,
-                                       uID: beerModel.get(index).uID
-                                   })
-                }
-
-                onPressAndHold: {
-                    if (!contextMenu) {
-                        contextMenu = contextMenuComponent.createObject(listItem)
-                    }
-                    contextMenu.show(contentItem)
-                }
-
-
-                Label {
-                    id: listLabel
-                    text: model.name
-                    color: beerModel.highlighted ? Theme.highlightColor : Theme.primaryColor
-                    anchors.verticalCenter: parent.verticalCenter
-                    x: Theme.horizontalPageMargin
-                }
-
-                Row {
-                    id: row
-                    width: parent.width / 3
-                    anchors.right: parent.right
-                    anchors.rightMargin: 5
-                    anchors.verticalCenter: parent.verticalCenter
-                    GlassItem {
-                        color: "white"
-                        width: parent.width / 5
-                        height: parent.width / 5
-                        radius: 4
-                        falloffRadius: 0.2
-                        visible: (model.rating >= 1) ? true : false
-                    }
+                Repeater {
+                    id: repeater
+                    model: 5
 
                     GlassItem {
                         color: "white"
@@ -88,62 +67,34 @@ Page {
                         height: parent.width / 5
                         radius: 4
                         falloffRadius: 0.2
-                        visible: (model.rating >= 2) ? true : false
-                    }
-
-                    GlassItem {
-                        color: "white"
-                        width: parent.width / 5
-                        height: parent.width / 5
-                        radius: 4
-                        falloffRadius: 0.2
-                        visible: (model.rating >= 3) ? true : false
-                    }
-
-                    GlassItem {
-                        color: "white"
-                        width: parent.width / 5
-                        height: parent.width / 5
-                        radius: 4
-                        falloffRadius: 0.2
-                        visible: (model.rating >= 4) ? true : false
-                    }
-
-                    GlassItem {
-                        color: "white"
-                        width: parent.width / 5
-                        height: parent.width / 5
-                        radius: 4
-                        falloffRadius: 0.2
-                        visible: (model.rating >= 5) ? true : false
+                        visible: (rating > index) ? true : false
                     }
                 }
             }
 
-            Component {
-                id: contextMenuComponent
-                ContextMenu {
-                    id: menu
-                    MenuItem {
-                        text: qsTr("Remove")
-                        onClicked: remove()
-                    }
+            menu: ContextMenu {
+                id: contextMenu
+
+                MenuItem {
+                    text: qsTr("Remove")
+                    onClicked: remorseAction(qsTr("Deleting"), function() {
+                        beerModel.remove(index);
+                        DB.removeBeer(beerModel.get(index).uID);
+                    })
                 }
             }
-
-
         }
 
         PullDownMenu {
             MenuItem {
-                text: "About"
+                text: qsTr("About")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("About.qml"), {dataContainer: root})
                 }
             }
 
             MenuItem {
-                text: "Add beer"
+                text: qsTr("Add beer")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("NewBeer.qml"), {"listModel": beerModel})
                 }
@@ -160,7 +111,7 @@ Page {
 
         ViewPlaceholder {
             id: emptyText
-            text: qsTr('No entries')
+            text: qsTr("No entries")
             enabled: beerModel.count === 0
         }
 
