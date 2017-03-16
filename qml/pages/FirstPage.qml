@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "../database.js" as DB
-
+import "."
 
 Page {
 
@@ -10,7 +9,7 @@ Page {
     SilicaListView {
         id: listView
         anchors.fill: parent
-        model: BeerModel { id: beerModel }
+        model: BeerModel
         header: PageHeader {
             title: "Beerware"
         }
@@ -27,14 +26,7 @@ Page {
             width: listView.width
             ListView.onRemove: animateRemoval(listItem)
 
-            onClicked: pageStack.push(Qt.resolvedUrl("ChangeBeer.qml"), {
-                                          listModel: beerModel,
-                                          index: index,
-                                          oldBeerName: beerModel.get(index).name,
-                                          oldBeerType: beerModel.get(index).category,
-                                          oldBeerRating: beerModel.get(index).rating,
-                                          uID: beerModel.get(index).uID
-                                      })
+            onClicked: pageStack.push(Qt.resolvedUrl("BeerPage.qml"), { "model": model })
 
             Label {
                 id: listLabel
@@ -43,9 +35,8 @@ Page {
                     leftMargin: Theme.horizontalPageMargin
                     verticalCenter: parent.verticalCenter
                 }
-                text: model.name
-                color: beerModel.highlighted || contextMenu.active ?
-                           Theme.highlightColor : Theme.primaryColor
+                text: name
+                color: contextMenu.active ? Theme.highlightColor : Theme.primaryColor
             }
 
             Row {
@@ -55,7 +46,7 @@ Page {
                     right: parent.right
                     rightMargin: Theme.horizontalPageMargin
                     verticalCenter: parent.verticalCenter
-                }                
+                }
 
                 Repeater {
                     id: repeater
@@ -78,8 +69,7 @@ Page {
                 MenuItem {
                     text: qsTr("Remove")
                     onClicked: remorseAction(qsTr("Deleting"), function() {
-                        beerModel.remove(index);
-                        DB.removeBeer(beerModel.get(index).uID);
+                        BeerModel.removeBeer(index);
                     })
                 }
             }
@@ -96,7 +86,7 @@ Page {
             MenuItem {
                 text: qsTr("Add beer")
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("NewBeer.qml"), {"listModel": beerModel})
+                    pageStack.push(Qt.resolvedUrl("BeerPage.qml"))
                 }
             }
         }
@@ -112,19 +102,9 @@ Page {
         ViewPlaceholder {
             id: emptyText
             text: qsTr("No entries")
-            enabled: beerModel.count === 0
-        }
-
-        Component.onCompleted: {
-            DB.loadBeers()
+            enabled: BeerModel.count === 0
         }
 
         VerticalScrollDecorator {}
     }
-
-    function addBeer(uID, name, category, rating){
-        beerModel.append({"uID": uID ,"name": name, "category": category, "rating": rating})
-    }
 }
-
-

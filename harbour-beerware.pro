@@ -16,18 +16,19 @@ CONFIG += sailfishapp
 
 SOURCES += src/harbour-beerware.cpp
 
-OTHER_FILES += qml/harbour-beerware.qml \
+OTHER_FILES += \
+    qml/harbour-beerware.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
+    qml/pages/About.qml \
+    qml/pages/BeerModel.qml \
+    qml/pages/BeerPage.qml \
+    qml/pages/qmldir \
     rpm/harbour-beerware.changes \
     rpm/harbour-beerware.spec \
     rpm/harbour-beerware.yaml \
     translations/*.ts \
-    harbour-beerware.desktop \
-    qml/pages/NewBeer.qml \
-    qml/pages/About.qml \
-    qml/pages/BeerModel.qml \
-    qml/database.js
+    harbour-beerware.desktop
 
 RESOURCES += harbour-beerware.qrc
 
@@ -40,6 +41,3 @@ CONFIG += sailfishapp_i18n
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/Beerware-de.ts
-
-DISTFILES += \
-    qml/pages/ChangeBeer.qml

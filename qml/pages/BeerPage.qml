@@ -1,29 +1,40 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "../database.js" as DB
-
+import "."
 
 Dialog {
+    property variant model
 
-    property BeerModel listModel
-    property int index
-    property string oldBeerName
-    property string oldBeerType
-    property int oldBeerRating
-    property int uID
+    Component.onCompleted: {
+        var rating = 5;
+        if (model) {
+            beerName.text = model.name;
+            beerCategory.text = model.category;
+            rating = model.rating;
+        }
 
-    DialogHeader { id: header }
+        for (var i = 0; i < rating; ++i) {
+            repeater.itemAt(i).dimmed = true;
+        }
+    }
 
     onAccepted: {
         var rating = 0;
-        for (var i = 0; i < repeater.count; i++) {
-            if (repeater.itemAt(i).dimmed === true)
-                rating += 1
+        for (var i = 0; i < repeater.count; ++i) {
+            rating += repeater.itemAt(i).dimmed;
         }
-        listModel.set(index, {"uID": uID, "name": beerName.text, "category": beerType.text, "rating": rating})
-        listModel.quick_sort()
-        DB.changeBeer(uID, beerName.text, beerType.text, rating)
+
+        if (model) {
+            BeerModel.changeBeer(model.uID, beerName.text, beerCategory.text, rating);
+            model.name = beerName.text;
+            model.category = beerCategory.text;
+            model.rating = rating;
+        } else {
+            BeerModel.saveBeer(beerName.text, beerCategory.text, rating);
+        }
     }
+
+    DialogHeader { id: header }
 
     Column {
         id: column
@@ -35,20 +46,18 @@ Dialog {
             id: beerName
             width: parent.width
             label: qsTr("Beer name")
-            text: oldBeerName
             focus: true
             EnterKey.enabled: text.length > 0
             EnterKey.iconSource: "image://theme/icon-m-enter-next"
             EnterKey.onClicked: {
-                beerType.focus = true;
+                beerCategory.focus = true;
             }
         }
 
         TextField {
-            id: beerType
+            id: beerCategory
             width: parent.width
             label: qsTr("Beer type")
-            text: oldBeerType
             EnterKey.enabled: text.length > 0
             EnterKey.iconSource: "image://theme/icon-m-enter-next"
             EnterKey.onClicked: {
@@ -64,26 +73,24 @@ Dialog {
             Repeater {
                 id: repeater
                 model: 5
+
                 GlassItem {
-                    id: glassItem
                     property bool dimmed: false
+
+                    id: glassItem
                     falloffRadius: dimmed ? undefined : 0.075
+
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
                             for (var i = 0; i <= index; i++) {
                                 repeater.itemAt(i).dimmed = true
                             }
-                            for (var i = index+1; i < repeater.count; i++) {
+                            for (i; i < repeater.count; i++) {
                                 repeater.itemAt(i).dimmed = false
                             }
                         }
                     }
-                }
-            }
-            Component.onCompleted: {
-                for (var i = 0; i < oldBeerRating; i++) {
-                    repeater.itemAt(i).dimmed = true
                 }
             }
         }
