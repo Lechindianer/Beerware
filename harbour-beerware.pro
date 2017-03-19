@@ -23,6 +23,7 @@ OTHER_FILES += \
     qml/pages/About.qml \
     qml/pages/BeerModel.qml \
     qml/pages/BeerPage.qml \
+    qml/pages/BeerDelegate.qml\
     qml/pages/qmldir \
     rpm/harbour-beerware.changes \
     rpm/harbour-beerware.spec \

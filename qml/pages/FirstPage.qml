@@ -1,77 +1,95 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtQml.Models 2.2
 import "."
 
 Page {
+    property bool _searchEnabled: false
 
     id: root
+
+    DelegateModel {
+
+        function update() {
+            var text = listView.headerItem.searchField.text.toLowerCase();
+            var noText = !text;
+            for (var i = 0; i < BeerModel.count; ++i) {
+                var beer = BeerModel.get(i);
+
+                if (noText ||
+                    beer.name.toLowerCase().indexOf(text) >= 0 ||
+                    beer.category.toLowerCase().indexOf(text) >= 0) {
+                    items.addGroups(i, 1, "visible");
+                } else {
+                    items.removeGroups(i, 1, "visible");
+                }
+            }
+        }
+
+        id: delegateModel
+        model: BeerModel
+        delegate: BeerDelegate { }
+        groups: [
+            DelegateModelGroup {
+                name: "visible"
+                includeByDefault: true
+            }
+        ]
+        filterOnGroup: "visible"
+    }
 
     SilicaListView {
         id: listView
         anchors.fill: parent
-        model: BeerModel
-        header: PageHeader {
-            title: "Beerware"
+        model: delegateModel
+        currentIndex: -1
+        header: Column {
+            property alias searchField: searchField
+
+            width: parent.width
+
+            PageHeader {
+                title: "Beerware"
+            }
+
+            Item {
+                id: searchFieldPlaceholder
+                width: parent.width
+                height: searchField.visible ? searchField.height : 0
+
+                Behavior on height {
+                    NumberAnimation {
+                        duration: 150
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+
+                SearchField {
+                    id: searchField
+                    width: parent.width
+                    placeholderText: qsTr("Beer name or category")
+                    focusOutBehavior: FocusBehavior.KeepFocus
+                    onTextChanged: delegateModel.update()
+
+                    opacity: _searchEnabled ? 1 : 0
+                    visible: opacity > 0
+                    onVisibleChanged: if (visible) forceActiveFocus()
+
+                    enabled: _searchEnabled
+                    onEnabledChanged: if (!enabled) text = ""
+
+                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
+
+                    Behavior on opacity { FadeAnimation { duration: 150 } }
+                }
+            }
         }
 
         section {
+
             property: "category"
             delegate: SectionHeader {
                 text: section
-            }
-        }
-
-        delegate: ListItem {
-            id: listItem
-            width: listView.width
-            ListView.onRemove: animateRemoval(listItem)
-
-            onClicked: pageStack.push(Qt.resolvedUrl("BeerPage.qml"), { "model": model })
-
-            Label {
-                id: listLabel
-                anchors {
-                    left: parent.left
-                    leftMargin: Theme.horizontalPageMargin
-                    verticalCenter: parent.verticalCenter
-                }
-                text: name
-                color: contextMenu.active ? Theme.highlightColor : Theme.primaryColor
-            }
-
-            Row {
-                id: row
-                width: parent.width / 3
-                anchors {
-                    right: parent.right
-                    rightMargin: Theme.horizontalPageMargin
-                    verticalCenter: parent.verticalCenter
-                }
-
-                Repeater {
-                    id: repeater
-                    model: 5
-
-                    GlassItem {
-                        color: "white"
-                        width: parent.width / 5
-                        height: parent.width / 5
-                        radius: 4
-                        falloffRadius: 0.2
-                        visible: (rating > index) ? true : false
-                    }
-                }
-            }
-
-            menu: ContextMenu {
-                id: contextMenu
-
-                MenuItem {
-                    text: qsTr("Remove")
-                    onClicked: remorseAction(qsTr("Deleting"), function() {
-                        BeerModel.removeBeer(index);
-                    })
-                }
             }
         }
 
@@ -81,6 +99,11 @@ Page {
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("About.qml"), {dataContainer: root})
                 }
+            }
+
+            MenuItem {
+                text: _searchEnabled ? qsTr("Hide search field") : qsTr("Show search field")
+                onClicked: _searchEnabled = !_searchEnabled
             }
 
             MenuItem {
