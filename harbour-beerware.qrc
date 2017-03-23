@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/harbour-beerware">
         <file alias="beer-300.png">icons/beer1-300px.png</file>
-        <file alias="beer-800.png">icons/beer1-800px.png</file>
     </qresource>
 </RCC>
