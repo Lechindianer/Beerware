@@ -5,6 +5,8 @@ import "."
 Dialog {
     property variant model
 
+    canAccept: beerName.text
+
     Component.onCompleted: {
         var rating = 5;
         if (model) {
@@ -46,6 +48,7 @@ Dialog {
             id: beerName
             width: parent.width
             label: qsTr("Beer name")
+            placeholderText: qsTr("Beer name")
             focus: true
             EnterKey.enabled: text.length > 0
             EnterKey.iconSource: "image://theme/icon-m-enter-next"
@@ -58,6 +61,7 @@ Dialog {
             id: beerCategory
             width: parent.width
             label: qsTr("Beer type")
+            placeholderText: qsTr("Beer type")
             EnterKey.enabled: text.length > 0
             EnterKey.iconSource: "image://theme/icon-m-enter-next"
             EnterKey.onClicked: {
