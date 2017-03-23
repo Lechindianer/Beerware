@@ -5,7 +5,7 @@ import QtQuick.LocalStorage 2.0
 
 ListModel {
 
-    property variant _db: {
+    property var _db: {
         var db = LocalStorage.openDatabaseSync("Beerware", "", "Beerware LS Database", 100000,
                     function(db) {
                         db.changeVersion("", "0.8.2");
