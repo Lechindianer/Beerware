@@ -59,21 +59,51 @@ Page {
         color: Theme.primaryColor
     }
 
-    Text {
+    Grid {
+        readonly property real _labelWidth: Math.max(copyrightLabel.contentWidth,
+                                                     licenseLabel.contentWidth)
+
         id: copyright
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: desc.bottom
         anchors.topMargin: Theme.paddingLarge
-        text: "<b>Copyright</b>: Pascal Schmid <br /><b>License: </b>Beerware (Revision 42)"
-        color: Theme.primaryColor
+        columns: 2
+        columnSpacing: Theme.paddingSmall
+        rowSpacing: Theme.paddingSmall
+
+        Label {
+            id: copyrightLabel
+            width: copyright._labelWidth
+            text: qsTr("<b>Copyright</b>:")
+            horizontalAlignment: Text.AlignRight
+            font.pixelSize: Theme.fontSizeSmall
+        }
+
+        Label {
+            text: "Pascal Schmid"
+            font.pixelSize: Theme.fontSizeSmall
+        }
+
+        Label {
+            id: licenseLabel
+            width: copyright._labelWidth
+            text: qsTr("<b>License</b>:")
+            horizontalAlignment: Text.AlignRight
+            font.pixelSize: Theme.fontSizeSmall
+        }
+
+        Label {
+            text: "Beerware (Revision 42)"
+            font.pixelSize: Theme.fontSizeSmall
+        }
     }
 
     Button {
         id: homepage
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: copyright.bottom
-        anchors.topMargin: Theme.paddingLarge
-        text: "Github repo mirror"
+        anchors.topMargin: Theme.paddingLarge * 2
+        text: qsTr("GitHub repo mirror")
         onClicked: {
             Qt.openUrlExternally("https://github.com/lechindianer/beerware")
         }
