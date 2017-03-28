@@ -12,19 +12,31 @@
 # The name of your application
 TARGET = harbour-beerware
 
-CONFIG += sailfishapp
+CONFIG += sailfishapp c++11
 
-SOURCES += src/harbour-beerware.cpp
+QT += sql
+
+SOURCES += \
+    src/harbour-beerware.cpp \
+    src/beersmodel.cpp \
+    src/beer.cpp \
+    src/beerssortfilterproxymodel.cpp \
+    src/settings.cpp
+
+HEADERS += \
+    src/beersmodel.h \
+    src/beer.h \
+    src/beerssortfilterproxymodel.h \
+    src/settings.h
 
 OTHER_FILES += \
     qml/harbour-beerware.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
     qml/pages/About.qml \
-    qml/pages/BeerModel.qml \
     qml/pages/BeerPage.qml \
-    qml/pages/BeerDelegate.qml\
-    qml/pages/qmldir \
+    qml/pages/BeerDelegate.qml \
+    qml/pages/SettingsPage.qml \
     rpm/harbour-beerware.changes \
     rpm/harbour-beerware.spec \
     rpm/harbour-beerware.yaml \

@@ -1,18 +1,19 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "."
+import harbour.beerware 1.0
+
 
 Dialog {
-    property variant model
+    property Beer beer
 
     canAccept: beerName.text
 
     Component.onCompleted: {
         var rating = 5;
-        if (model) {
-            beerName.text = model.name;
-            beerCategory.text = model.category;
-            rating = model.rating;
+        if (beer) {
+            beerName.text = beer.name;
+            beerCategory.text = beer.category;
+            rating = beer.rating;
         }
 
         for (var i = 0; i < rating; ++i) {
@@ -26,13 +27,13 @@ Dialog {
             rating += repeater.itemAt(i).dimmed;
         }
 
-        if (model) {
-            BeerModel.changeBeer(model.uID, beerName.text, beerCategory.text, rating);
-            model.name = beerName.text;
-            model.category = beerCategory.text;
-            model.rating = rating;
+        if (beer) {
+            beer.name = beerName.text;
+            beer.category = beerCategory.text;
+            beer.rating = rating;
+            beersModel.updateBeer(beer);
         } else {
-            BeerModel.saveBeer(beerName.text, beerCategory.text, rating);
+            beersModel.addBeer(beerName.text, beerCategory.text, rating);
         }
     }
 

@@ -1,52 +1,23 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtQml.Models 2.1
-import "."
+
 
 Page {
-    property bool _searchEnabled: false
+    readonly property bool _currentlySearching: listView.headerItem.searchField.text.length
 
     id: root
-
-    DelegateModel {
-
-        function update() {
-            var text = listView.headerItem.searchField.text.toLowerCase();
-            var noText = !text;
-            for (var i = 0; i < BeerModel.count; ++i) {
-                var beer = BeerModel.get(i);
-
-                if (noText ||
-                    beer.name.toLowerCase().indexOf(text) >= 0 ||
-                    beer.category.toLowerCase().indexOf(text) >= 0) {
-                    items.addGroups(i, 1, "visible");
-                } else {
-                    items.removeGroups(i, 1, "visible");
-                }
-            }
-        }
-
-        id: delegateModel
-        model: BeerModel
-        delegate: BeerDelegate { }
-        groups: [
-            DelegateModelGroup {
-                name: "visible"
-                includeByDefault: true
-            }
-        ]
-        filterOnGroup: "visible"
-    }
 
     SilicaListView {
         id: listView
         anchors.fill: parent
-        model: delegateModel
+        model: beersModel
+        delegate: BeerDelegate { }
         currentIndex: -1
         header: Column {
             property alias searchField: searchField
 
-            width: parent.width
+            width: parent ? parent.width : 0
 
             PageHeader {
                 title: "Beerware"
@@ -69,13 +40,13 @@ Page {
                     width: parent.width
                     placeholderText: qsTr("Beer name or category")
                     focusOutBehavior: FocusBehavior.KeepFocus
-                    onTextChanged: delegateModel.update()
+                    onTextChanged: beersModel.setFilterFixedString(text)
 
-                    opacity: _searchEnabled ? 1 : 0
+                    opacity: settings.searchEnabled ? 1 : 0
                     visible: opacity > 0
                     onVisibleChanged: if (visible) forceActiveFocus()
 
-                    enabled: _searchEnabled
+                    enabled: settings.searchEnabled
                     onEnabledChanged: if (!enabled) text = ""
 
                     EnterKey.iconSource: "image://theme/icon-m-enter-close"
@@ -86,8 +57,7 @@ Page {
         }
 
         section {
-
-            property: "category"
+            property: "beer.category"
             delegate: SectionHeader {
                 text: section
             }
@@ -95,22 +65,20 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                text: qsTr("About")
+                text: qsTr("Settings")
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("About.qml"), {dataContainer: root})
+                    pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
                 }
             }
 
             MenuItem {
-                text: _searchEnabled ? qsTr("Hide search field") : qsTr("Show search field")
-                onClicked: _searchEnabled = !_searchEnabled
+                text: settings.searchEnabled ? qsTr("Hide search field") : qsTr("Show search field")
+                onClicked: settings.searchEnabled = !settings.searchEnabled
             }
 
             MenuItem {
                 text: qsTr("Add beer")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("BeerPage.qml"))
-                }
+                onClicked: pageStack.push(Qt.resolvedUrl("BeerPage.qml"))
             }
         }
 
@@ -124,8 +92,8 @@ Page {
 
         ViewPlaceholder {
             id: emptyText
-            text: qsTr("No entries")
-            enabled: BeerModel.count === 0
+            text: _currentlySearching ? qsTr("Nothing found") : qsTr("No entries")
+            enabled: listView.count === 0
         }
 
         VerticalScrollDecorator {}

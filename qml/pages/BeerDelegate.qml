@@ -1,13 +1,13 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "."
+
 
 ListItem {
     id: listItem
     width: listView.width
-    ListView.onRemove: animateRemoval(listItem)
+    ListView.onRemove: _currentlySearching ? undefined : animateRemoval(listItem)
 
-    onClicked: pageStack.push(Qt.resolvedUrl("BeerPage.qml"), { "model": model })
+    onClicked: pageStack.push(Qt.resolvedUrl("BeerPage.qml"), { "beer": beer })
 
     Label {
         id: listLabel
@@ -16,7 +16,7 @@ ListItem {
             leftMargin: Theme.horizontalPageMargin
             verticalCenter: parent.verticalCenter
         }
-        text: name
+        text: beer.name
         color: contextMenu.active ? Theme.highlightColor : Theme.primaryColor
     }
 
@@ -39,7 +39,7 @@ ListItem {
                 height: parent.width / 5
                 radius: 4
                 falloffRadius: 0.2
-                visible: (rating > index) ? true : false
+                visible: (beer.rating > index) ? true : false
             }
         }
     }
@@ -50,7 +50,7 @@ ListItem {
         MenuItem {
             text: qsTr("Remove")
             onClicked: remorseAction(qsTr("Deleting"), function() {
-                BeerModel.removeBeer(index);
+                beersModel.removeBeer(index);
             })
         }
     }
