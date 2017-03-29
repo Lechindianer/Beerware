@@ -28,6 +28,7 @@ OTHER_FILES += \
     qml/pages/BeerPage.qml \
     qml/pages/BeerDelegate.qml \
     qml/pages/SettingsPage.qml \
+    qml/pages/CategoriesPage.qml \
     rpm/harbour-beerware.changes \
     rpm/harbour-beerware.spec \
     rpm/harbour-beerware.yaml \

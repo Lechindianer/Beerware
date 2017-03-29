@@ -41,6 +41,21 @@
         <source>Beer type</source>
         <translation>Сорт</translation>
     </message>
+    <message>
+        <source>Rating</source>
+        <translation>Оценка</translation>
+    </message>
+</context>
+<context>
+    <name>CategoriesPage</name>
+    <message>
+        <source>Beer type</source>
+        <translation>Сорт</translation>
+    </message>
+    <message>
+        <source>Add a new beer type</source>
+        <translation>Добавить новый сорт пива</translation>
+    </message>
 </context>
 <context>
     <name>FirstPage</name>

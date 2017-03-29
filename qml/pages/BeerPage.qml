@@ -12,7 +12,7 @@ Dialog {
         var rating = 5;
         if (beer) {
             beerName.text = beer.name;
-            beerCategory.text = beer.category;
+            beerCategory.value = beer.category;
             rating = beer.rating;
         }
 
@@ -29,11 +29,11 @@ Dialog {
 
         if (beer) {
             beer.name = beerName.text;
-            beer.category = beerCategory.text;
+            beer.category = beerCategory.value;
             beer.rating = rating;
             beersModel.updateBeer(beer);
         } else {
-            beersModel.addBeer(beerName.text, beerCategory.text, rating);
+            beersModel.addBeer(beerName.text, beerCategory.value, rating);
         }
     }
 
@@ -51,23 +51,25 @@ Dialog {
             label: qsTr("Beer name")
             placeholderText: qsTr("Beer name")
             focus: true
-            EnterKey.enabled: text.length > 0
-            EnterKey.iconSource: "image://theme/icon-m-enter-next"
-            EnterKey.onClicked: {
-                beerCategory.focus = true;
-            }
+            EnterKey.iconSource: "image://theme/icon-m-enter-close"
         }
 
-        TextField {
+        ValueButton {
             id: beerCategory
             width: parent.width
             label: qsTr("Beer type")
-            placeholderText: qsTr("Beer type")
-            EnterKey.enabled: text.length > 0
-            EnterKey.iconSource: "image://theme/icon-m-enter-next"
-            EnterKey.onClicked: {
-                row.focus = true;
+            onClicked: {
+                pageStack.push(Qt.resolvedUrl("CategoriesPage.qml"));
+                var page = pageStack.currentPage;
+                page.category = value;
+                page.accepted.connect(function() {
+                    value = page.category;
+                });
             }
+        }
+
+        SectionHeader {
+            text: qsTr("Rating")
         }
 
         Row {

@@ -17,7 +17,7 @@ ListItem {
             verticalCenter: parent.verticalCenter
         }
         text: beer.name
-        color: contextMenu.active ? Theme.highlightColor : Theme.primaryColor
+        color: listItem.highlighted || contextMenu.active ? Theme.highlightColor : Theme.primaryColor
     }
 
     Row {

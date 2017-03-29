@@ -28,6 +28,8 @@ public:
 
     Beer *getBeer(const int &row);
 
+    Q_INVOKABLE QStringList categories() const;
+
 private slots:
     void select();
     void initInfoTable(const QString &version);

@@ -170,6 +170,23 @@ Beer *BeersModel::getBeer(const int &row)
     return mData.at(row);
 }
 
+QStringList BeersModel::categories() const
+{
+    QSqlQuery query;
+    QStringList sl;
+    if (!query.exec(QLatin1String("SELECT DISTINCT category FROM beers "
+                                  "ORDER BY category COLLATE NOCASE")))
+    {
+        qWarning() << query.lastError();
+        return sl;
+    }
+    while (query.next())
+    {
+        sl.append(query.value(0).toString());
+    }
+    return sl;
+}
+
 void BeersModel::select()
 {
     QSqlQuery query;

@@ -41,6 +41,21 @@
         <source>Beer type</source>
         <translation type="unfinished">Biersorte</translation>
     </message>
+    <message>
+        <source>Rating</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CategoriesPage</name>
+    <message>
+        <source>Beer type</source>
+        <translation type="unfinished">Biersorte</translation>
+    </message>
+    <message>
+        <source>Add a new beer type</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FirstPage</name>
