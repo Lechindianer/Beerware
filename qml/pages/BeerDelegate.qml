@@ -3,6 +3,9 @@ import Sailfish.Silica 1.0
 
 
 ListItem {
+    property color itemColor: highlighted || contextMenu.active ?
+                                  Theme.highlightColor : Theme.primaryColor
+
     id: listItem
     width: listView.width
     ListView.onRemove: _currentlySearching ? undefined : animateRemoval(listItem)
@@ -17,7 +20,7 @@ ListItem {
             verticalCenter: parent.verticalCenter
         }
         text: beer.name
-        color: listItem.highlighted || contextMenu.active ? Theme.highlightColor : Theme.primaryColor
+        color: itemColor
     }
 
     Row {
@@ -34,9 +37,9 @@ ListItem {
             model: 5
 
             GlassItem {
-                color: "white"
-                width: parent.width / 5
-                height: parent.width / 5
+                color: itemColor
+                width: parent.width * 0.2
+                height: width
                 radius: 4
                 falloffRadius: 0.2
                 visible: (beer.rating > index) ? true : false
