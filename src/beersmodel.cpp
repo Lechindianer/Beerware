@@ -187,6 +187,30 @@ QStringList BeersModel::categories() const
     return sl;
 }
 
+bool BeersModel::exportBeers() const
+{
+    if (mData.isEmpty())
+    {
+        return false;
+    }
+    QFile exportFile(QStringLiteral("%0/Beerware_%1.csv").arg(
+                         QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
+                         QDateTime::currentDateTime().toString(QLatin1String("yyyyMMddhhmmss"))));
+    if (exportFile.open(QFile::WriteOnly))
+    {
+        QTextStream writer(&exportFile);
+        writer.setCodec("UTF8");
+        writer << "name,category,rating\n";
+        foreach (Beer *beer, mData)
+        {
+            writer << beer->mName << ',' << beer->mCategory << ',' << beer->mRating << '\n';
+        }
+        exportFile.close();
+        return true;
+    }
+    return false;
+}
+
 void BeersModel::select()
 {
     QSqlQuery query;

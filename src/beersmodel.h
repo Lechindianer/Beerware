@@ -30,6 +30,8 @@ public:
 
     Q_INVOKABLE QStringList categories() const;
 
+    Q_INVOKABLE bool exportBeers() const;
+
 private slots:
     void select();
     void initInfoTable(const QString &version);

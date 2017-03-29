@@ -114,5 +114,29 @@
         <source>Category - Rating - Name</source>
         <translation>Сорт - оценка - марка</translation>
     </message>
+    <message>
+        <source>Export beers to a CSV file to the Documents directory</source>
+        <translation>Экспортировать список пива в формате CSV в каталог Документы</translation>
+    </message>
+    <message>
+        <source>Export beers</source>
+        <translation>Экспортировать пиво</translation>
+    </message>
+    <message>
+        <source>Interface</source>
+        <translation>Интерфейс</translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation>Экспорт</translation>
+    </message>
+    <message>
+        <source>An error occurred while exporting beers</source>
+        <translation>При экспорте произошла ошибка</translation>
+    </message>
+    <message>
+        <source>Beers were successfully exported</source>
+        <translation>Экспорт успешно выполнен</translation>
+    </message>
 </context>
 </TS>

@@ -114,5 +114,29 @@
         <source>Category - Rating - Name</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Export beers to a CSV file to the Documents directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export beers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>An error occurred while exporting beers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beers were successfully exported</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
