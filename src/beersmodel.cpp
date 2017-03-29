@@ -97,7 +97,13 @@ bool BeersModel::addBeer(const QString &name, const QString &category, const int
     {
         auto ind = mData.size();
         this->beginInsertRows(QModelIndex(), ind, ind);
-        mData.append(new Beer(name, category, rating));
+        if (!query.exec(QLatin1String("SELECT uID FROM beers ORDER BY uID DESC LIMIT 1")))
+        {
+            qWarning() << query.lastError();
+            return false;
+        }
+        query.first();
+        mData.append(new Beer(query.value(0).toInt(), name, category, rating));
         this->endInsertRows();
     }
     return true;
@@ -124,8 +130,7 @@ bool BeersModel::updateBeer(Beer *beer)
         qWarning() << query.lastError();
         return false;
     }
-    query.next();
-    if (query.value(0) != mData.size())
+    if (query.first() && query.value(0) != mData.size())
     {
         this->beginResetModel();
         qDeleteAll(mData);
@@ -139,21 +144,19 @@ bool BeersModel::updateBeer(Beer *beer)
 
 bool BeersModel::removeBeer(const int &index)
 {
-    if (index >= mData.size())
-    {
-        return false;
-    }
+    Q_ASSERT(index >=0 && index < mData.size());
 
     QSqlQuery query;
+    auto beer = mData.at(index);
     query.prepare(QLatin1String("DELETE FROM beers WHERE uID=(?)"));
-    query.bindValue(0, mData[index]->mUId);
+    query.bindValue(0, beer->mUId);
     if(!query.exec())
     {
         qWarning() << query.lastError();
         return false;
     }
     this->beginRemoveRows(QModelIndex(), index, index);
-    mData.at(index)->deleteLater();
+    beer->deleteLater();
     mData.removeAt(index);
     this->endRemoveRows();
 
@@ -204,6 +207,7 @@ void BeersModel::checkDbVersion()
 {
     QSqlQuery query;
     query.exec(QLatin1String("SELECT Version FROM info"));
+    query.first();
     auto version = query.value(0).toString();
     if (version == "0.8")
     {
