@@ -30,6 +30,14 @@
         <source>Deleting</source>
         <translation type="unfinished">Deleting</translation>
     </message>
+    <message>
+        <source>Share</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The description of the beer was copied to the clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BeerPage</name>

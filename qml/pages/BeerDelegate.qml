@@ -56,5 +56,17 @@ ListItem {
                 beersModel.removeBeer(index);
             })
         }
+
+        MenuItem {
+            text: qsTr("Share")
+            onClicked:  {
+                if (beer.category) {
+                    Clipboard.text = "%0 (%1) %2/5".arg(beer.name).arg(beer.category).arg(beer.rating);
+                } else {
+                    Clipboard.text = "%0 %1/5".arg(beer.name).arg(beer.rating);
+                }
+                notification.show(qsTr("The description of the beer was copied to the clipboard"));
+            }
+        }
     }
 }

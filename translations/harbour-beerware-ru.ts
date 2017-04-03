@@ -30,6 +30,14 @@
         <source>Deleting</source>
         <translation>Удаление</translation>
     </message>
+    <message>
+        <source>Share</source>
+        <translation>Поделиться</translation>
+    </message>
+    <message>
+        <source>The description of the beer was copied to the clipboard</source>
+        <translation>Описание пива скопировано в буфер обмена</translation>
+    </message>
 </context>
 <context>
     <name>BeerPage</name>
