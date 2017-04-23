@@ -1,150 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_US">
+<TS version="2.1" language="ru_RU">
 <context>
     <name>About</name>
     <message>
         <source>Rate your favourite beers</source>
-        <translation>Rate your favourite beers</translation>
+        <translation>Оцените свое любимое пиво</translation>
     </message>
     <message>
         <source>&lt;b&gt;Copyright&lt;/b&gt;:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Права&lt;/b&gt;:</translation>
     </message>
     <message>
         <source>&lt;b&gt;License&lt;/b&gt;:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Лицензия&lt;/b&gt;:</translation>
     </message>
     <message>
         <source>GitHub repo mirror</source>
-        <translation type="unfinished"></translation>
+        <translation>GitHub</translation>
     </message>
 </context>
 <context>
     <name>BeerDelegate</name>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Remove</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Deleting</source>
-        <translation type="unfinished">Deleting</translation>
+        <translation>Удаление</translation>
     </message>
     <message>
         <source>Share</source>
-        <translation type="unfinished"></translation>
+        <translation>Поделиться</translation>
     </message>
     <message>
         <source>The description of the beer was copied to the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание пива скопировано в буфер обмена</translation>
     </message>
 </context>
 <context>
     <name>BeerPage</name>
     <message>
         <source>Beer name</source>
-        <translation type="unfinished">Beer name</translation>
+        <translation>Марка</translation>
     </message>
     <message>
         <source>Beer type</source>
-        <translation type="unfinished">Beer type</translation>
+        <translation>Сорт</translation>
     </message>
     <message>
         <source>Rating</source>
-        <translation type="unfinished"></translation>
+        <translation>Оценка</translation>
     </message>
 </context>
 <context>
     <name>CategoriesPage</name>
     <message>
         <source>Beer type</source>
-        <translation type="unfinished">Beer type</translation>
+        <translation>Сорт</translation>
     </message>
     <message>
         <source>Add a new beer type</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить новый сорт пива</translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
         <source>Beer name or category</source>
-        <translation type="unfinished"></translation>
+        <translation>Марка или сорт пива</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>Hide search field</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть поле поиска</translation>
     </message>
     <message>
         <source>Show search field</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать поле поиска</translation>
     </message>
     <message>
         <source>Add beer</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить пиво</translation>
     </message>
     <message>
         <source>Return to Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Наверх</translation>
     </message>
     <message>
         <source>Nothing found</source>
-        <translation type="unfinished"></translation>
+        <translation>Ничего не найдено</translation>
     </message>
     <message>
         <source>No entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Здесь ничего нет</translation>
     </message>
 </context>
 <context>
     <name>SettingsPage</name>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>О приложении</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>Sorting order</source>
-        <translation type="unfinished"></translation>
+        <translation>Порядок сортировки</translation>
     </message>
     <message>
         <source>Category - Name - Rating</source>
-        <translation type="unfinished"></translation>
+        <translation>Сорт - марка - оценка</translation>
     </message>
     <message>
         <source>Category - Rating - Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Сорт - оценка - марка</translation>
     </message>
     <message>
         <source>Export beers to a CSV file to the Documents directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспортировать список пива в формате CSV в каталог Документы</translation>
     </message>
     <message>
         <source>Export beers</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспортировать пиво</translation>
     </message>
     <message>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Интерфейс</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспорт</translation>
     </message>
     <message>
         <source>An error occurred while exporting beers</source>
-        <translation type="unfinished"></translation>
+        <translation>При экспорте произошла ошибка</translation>
     </message>
     <message>
         <source>Beers were successfully exported</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспорт успешно выполнен</translation>
     </message>
 </context>
 </TS>

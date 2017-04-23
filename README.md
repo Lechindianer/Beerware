@@ -11,5 +11,7 @@ sorted list of your tried beers.
 
 The beer icon is by [aungkarns](https://openclipart.org/detail/73591/beer)
 
+The icon shape by [Morpog](https://github.com/Morpog/jolla-icon-shapes)
+
 ## ATTENTION
 This code could eat your cat, burn your house or some other catasthrophy. Use with care!

@@ -36,4 +36,5 @@ Makefile*
 *.qmlproject.user
 *.qmlproject.user.*
 
-
+# Sailfish
+rpm/harbour-beerware.spec*

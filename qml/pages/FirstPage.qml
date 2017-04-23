@@ -1,152 +1,84 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "../database.js" as DB
+import QtQml.Models 2.1
 
 
 Page {
+    readonly property bool _currentlySearching: listView.headerItem.searchField.text.length
 
     id: root
 
     SilicaListView {
         id: listView
-        model: BeerModel { id: beerModel }
-        width: root.width
-        height: root.height
-        header: PageHeader {
-            title: "Beerware"
+        anchors.fill: parent
+        model: beersModel
+        delegate: BeerDelegate { }
+        currentIndex: -1
+        header: Column {
+            property alias searchField: searchField
+
+            width: parent ? parent.width : 0
+
+            PageHeader {
+                title: "Beerware"
+            }
+
+            Item {
+                id: searchFieldPlaceholder
+                width: parent.width
+                height: searchField.visible ? searchField.height : 0
+
+                Behavior on height {
+                    NumberAnimation {
+                        duration: 150
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+
+                SearchField {
+                    id: searchField
+                    width: parent.width
+                    placeholderText: qsTr("Beer name or category")
+                    focusOutBehavior: FocusBehavior.KeepFocus
+                    onTextChanged: beersModel.setFilterFixedString(text)
+
+                    opacity: settings.searchEnabled ? 1 : 0
+                    visible: opacity > 0
+                    onVisibleChanged: if (visible) forceActiveFocus()
+
+                    enabled: settings.searchEnabled
+                    onEnabledChanged: if (!enabled) text = ""
+
+                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
+
+                    Behavior on opacity { FadeAnimation { duration: 150 } }
+                }
+            }
         }
+
         section {
-            property: 'category'
+            property: "beer.category"
             delegate: SectionHeader {
                 text: section
             }
         }
-        delegate: ListItem {
-            id: listItem
-            width: listView.width
-            ListView.onRemove: animateRemoval(listItem)
-
-            property Item contextMenu
-            property bool menuOpen: contextMenu != null && contextMenu.parent === listItem
-            height: menuOpen ? contextMenu.height + contentItem.height : contentItem.height
-
-            function remove() {
-                remorseAction(qsTr("Deleting"), function() { beerModel.remove(index) })
-                DB.removeBeer(beerModel.get(index).uID)
-            }
-
-            BackgroundItem {
-                id: contentItem
-                anchors.fill: parent
-
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("ChangeBeer.qml"),
-                                   {
-                                       listModel: beerModel,
-                                       index: index,
-                                       oldBeerName: beerModel.get(index).name,
-                                       oldBeerType: beerModel.get(index).category,
-                                       oldBeerRating: beerModel.get(index).rating,
-                                       uID: beerModel.get(index).uID
-                                   })
-                }
-
-                onPressAndHold: {
-                    if (!contextMenu) {
-                        contextMenu = contextMenuComponent.createObject(listItem)
-                    }
-                    contextMenu.show(contentItem)
-                }
-
-
-                Label {
-                    id: listLabel
-                    text: model.name
-                    color: beerModel.highlighted ? Theme.highlightColor : Theme.primaryColor
-                    anchors.verticalCenter: parent.verticalCenter
-                    x: Theme.horizontalPageMargin
-                }
-
-                Row {
-                    id: row
-                    width: parent.width / 3
-                    anchors.right: parent.right
-                    anchors.rightMargin: 5
-                    anchors.verticalCenter: parent.verticalCenter
-                    GlassItem {
-                        color: "white"
-                        width: parent.width / 5
-                        height: parent.width / 5
-                        radius: 4
-                        falloffRadius: 0.2
-                        visible: (model.rating >= 1) ? true : false
-                    }
-
-                    GlassItem {
-                        color: "white"
-                        width: parent.width / 5
-                        height: parent.width / 5
-                        radius: 4
-                        falloffRadius: 0.2
-                        visible: (model.rating >= 2) ? true : false
-                    }
-
-                    GlassItem {
-                        color: "white"
-                        width: parent.width / 5
-                        height: parent.width / 5
-                        radius: 4
-                        falloffRadius: 0.2
-                        visible: (model.rating >= 3) ? true : false
-                    }
-
-                    GlassItem {
-                        color: "white"
-                        width: parent.width / 5
-                        height: parent.width / 5
-                        radius: 4
-                        falloffRadius: 0.2
-                        visible: (model.rating >= 4) ? true : false
-                    }
-
-                    GlassItem {
-                        color: "white"
-                        width: parent.width / 5
-                        height: parent.width / 5
-                        radius: 4
-                        falloffRadius: 0.2
-                        visible: (model.rating >= 5) ? true : false
-                    }
-                }
-            }
-
-            Component {
-                id: contextMenuComponent
-                ContextMenu {
-                    id: menu
-                    MenuItem {
-                        text: qsTr("Remove")
-                        onClicked: remove()
-                    }
-                }
-            }
-
-
-        }
 
         PullDownMenu {
             MenuItem {
-                text: "About"
+                text: qsTr("Settings")
                 onClicked: {
-                    pageStack.push(Qt.resolvedUrl("About.qml"), {dataContainer: root})
+                    pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
                 }
             }
 
             MenuItem {
-                text: "Add beer"
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("NewBeer.qml"), {"listModel": beerModel})
-                }
+                text: settings.searchEnabled ? qsTr("Hide search field") : qsTr("Show search field")
+                onClicked: settings.searchEnabled = !settings.searchEnabled
+            }
+
+            MenuItem {
+                text: qsTr("Add beer")
+                onClicked: pageStack.push(Qt.resolvedUrl("BeerPage.qml"))
             }
         }
 
@@ -160,20 +92,10 @@ Page {
 
         ViewPlaceholder {
             id: emptyText
-            text: qsTr('No entries')
-            enabled: beerModel.count === 0
-        }
-
-        Component.onCompleted: {
-            DB.loadBeers()
+            text: _currentlySearching ? qsTr("Nothing found") : qsTr("No entries")
+            enabled: listView.count === 0
         }
 
         VerticalScrollDecorator {}
     }
-
-    function addBeer(uID, name, category, rating){
-        beerModel.append({"uID": uID ,"name": name, "category": category, "rating": rating})
-    }
 }
-
-
