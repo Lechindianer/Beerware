@@ -1,3 +1,7 @@
+## Update
+
+This project isn't updated anymore. My Jolla died :( Please check out [Petr's fork](https://github.com/mentaljam/Beerware) instead
+
 You know the situation: You're in a bar/disco (that) you don't visit frequently.
 You order a beer but... oh no! What a horrible taste!  Then you remember: you 
 ordered this beer last time --- you just didn't remember that you disliked it.
